@@ -3,8 +3,11 @@ package view;
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener;
 import com.vaadin.ui.*;
+import logic.Main;
+
 public class Login extends VerticalLayout implements View
 {
+    Main main = new Main();
     private TextField textLogin;
     private PasswordField pass;
     private Button buttonSingUp;
@@ -26,6 +29,8 @@ public class Login extends VerticalLayout implements View
 
         //navigator
         buttonSingUp.addClickListener((Button.ClickListener) clickEvent -> getUI().getNavigator().navigateTo("rejestracja"));
+
+
 
         //layout
         HorizontalLayout horizontalLayout = new HorizontalLayout();

@@ -109,6 +109,8 @@ public class Rejestracja extends VerticalLayout implements View
         buttonCancel = new Button("Anuluj");
         buttonCancel.addStyleName("danger");
 
+        buttonCancel.addClickListener((Button.ClickListener) clickEvent -> getUI().getNavigator().navigateTo("login"));
+
         footer.addComponent(buttonConfirm);
         footer.addComponent(buttonCancel);
 
