@@ -1,4 +1,4 @@
-package vaadin;
+package view;
 
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener;
@@ -25,15 +25,7 @@ public class Login extends VerticalLayout implements View
         buttonSingUp.addStyleName("primary");
 
         //navigator
-        buttonSingUp.addClickListener(new Button.ClickListener()
-        {
-            @Override
-            public void buttonClick(Button.ClickEvent clickEvent)
-            {
-                getUI().getNavigator().navigateTo("rejestracja");
-            }
-        });
-
+        buttonSingUp.addClickListener((Button.ClickListener) clickEvent -> getUI().getNavigator().navigateTo("rejestracja"));
 
         //layout
         HorizontalLayout horizontalLayout = new HorizontalLayout();
@@ -56,10 +48,7 @@ public class Login extends VerticalLayout implements View
         addComponent(loginPanel);
         setComponentAlignment(loginPanel,Alignment.MIDDLE_CENTER);
         setHeight("100%");
-        /*
-        addComponent(login);
-        addComponent(pass);
-        */
+
     }
 
     @Override

@@ -1,12 +1,12 @@
-package vaadin;
+package view;
 
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener;
 import com.vaadin.ui.VerticalLayout;
 
-public class PanelAdministratora extends VerticalLayout implements View
+public class PanelUzytkownika extends VerticalLayout implements View
 {
-    public PanelAdministratora()
+    public PanelUzytkownika()
     {
 
     }

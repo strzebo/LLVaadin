@@ -1,13 +1,12 @@
-package vaadin;
-
+package view;
 
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener;
 import com.vaadin.ui.VerticalLayout;
 
-public class Index extends VerticalLayout implements View
+public class Trasy extends VerticalLayout implements View
 {
-    public Index()
+    public Trasy()
     {
 
     }

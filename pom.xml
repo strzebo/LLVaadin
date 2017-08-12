@@ -150,7 +150,7 @@
 	<profiles>
 		<profile>
 			<!-- Vaadin pre-release repositories -->
-			<id>vaadin-prerelease</id>
+			<id>view-prerelease</id>
 			<activation>
 				<activeByDefault>false</activeByDefault>
 			</activation>

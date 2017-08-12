@@ -1,15 +1,17 @@
-package vaadin;
+package view;
 
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener;
 import com.vaadin.shared.ui.MarginInfo;
 import com.vaadin.ui.*;
+import logic.Main;
 
 import java.util.ArrayList;
 
-
 public class Rejestracja extends VerticalLayout implements View
 {
+    Main mainLogic = new Main();
+
     Label labelTitle;
     Label labelHeader;
 
@@ -93,6 +95,16 @@ public class Rejestracja extends VerticalLayout implements View
 
         buttonConfirm = new Button("Potwierdź");
         buttonConfirm.addStyleName("primary");
+
+        buttonConfirm.addClickListener((Button.ClickListener) clickEvent ->
+        {
+            mainLogic.singUp(textName.getValue(), textLastName.getValue(), optionGender.getValue(), textEmail.getValue(),
+                    textLogin.getValue(), pass.getValue(), comboType.getCaption());
+
+            Notification.show("Rejestracja przebiegła pomyślnie!");
+
+            getUI().getNavigator().navigateTo("login");
+        });
 
         buttonCancel = new Button("Anuluj");
         buttonCancel.addStyleName("danger");

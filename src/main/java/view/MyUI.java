@@ -1,4 +1,4 @@
-package vaadin;
+package view;
 
 import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.VaadinServletConfiguration;

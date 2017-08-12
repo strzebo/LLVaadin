@@ -1,9 +1,10 @@
-package dbconnection;
+package logic;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
+
 
 public class DbConnection
 {
@@ -24,6 +25,7 @@ public class DbConnection
             //Class.forName("com.mysql.jdbc.Driver");
             connection = DriverManager.getConnection("\"jdbc:mysql://" + server + ":" + port + "/" + database +"\"",login,password);
             statement = connection.createStatement();
+
         }
         catch(Exception ex)
         {
