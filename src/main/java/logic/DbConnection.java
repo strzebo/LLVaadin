@@ -10,20 +10,14 @@ public class DbConnection
 {
     private Connection connection;
     private Statement statement;
-
     private String cm = "";
-    private String server = "";
-    private String port = "80";
-    private String database = "toloto";
-    private String login = "toloto";
-    private String password = "LysiaCzek";
 
-    public void Initialize()
+    private void Initialize()
     {
         try
         {
             Class.forName("com.mysql.jdbc.Driver");
-            connection = DriverManager.getConnection("jdbc:mysql://178.62.84.129:80/toloto", login, password);
+            connection = DriverManager.getConnection("jdbc:mysql://178.62.84.129:80/toloto", "toloto", "LysiaCzek");
             statement = connection.createStatement();
         }
         catch(Exception ex)
