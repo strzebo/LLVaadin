@@ -23,12 +23,11 @@ public class Login extends VerticalLayout implements View
         //UI - buttons
         buttonLogin = new Button("Login");
         buttonLogin.addStyleName("friendly");
+        buttonLogin.addClickListener(clickEvent -> getUI().getNavigator().navigateTo("index"));
 
         buttonSingUp = new Button("Rejestracja");
         buttonSingUp.addStyleName("primary");
-
-        //navigator
-        buttonSingUp.addClickListener((Button.ClickListener) clickEvent -> getUI().getNavigator().navigateTo("rejestracja"));
+        buttonSingUp.addClickListener(clickEvent -> getUI().getNavigator().navigateTo("rejestracja"));
 
 
 

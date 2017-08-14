@@ -66,7 +66,7 @@ public class Main
 
         try
         {
-            db.Insert("uzytkownik",columns,value);
+           // db.Insert("uzytkownik",columns,value);
         } catch (Exception e)
         {
             e.printStackTrace();
