@@ -41,18 +41,36 @@ public class Main
 
 
     //rejestracja -> dodać zapytanie SQL
-    public void singUp(String name, String lastName, String gender, String email, String login, String password, String type)
+    public void singUp(String name, String lastName, String email, String login, String password, String type)
     {
+        DbConnection db = new DbConnection();
+        String boolowska = "";
+
+        String columns = "Imie, Nazwisko, Login, Haslo, Email" + boolowska;
+        String value = "";
+
         if(type.equals("Użytkownik"))
         {
-            Uzytkownik uzytkownik = new Uzytkownik(name, lastName, gender, email, login, password);
+            Uzytkownik uzytkownik = new Uzytkownik(name, lastName, email, login, password);
             userList.add(uzytkownik);
 
+            value = "'" + name + "','" + lastName + "','" + email + "','" + login + "','" + password + "','" + email + "','" + "1";
         }
         else
         {
-            Pracownik pracownik = new Pracownik(name, lastName, gender, email, login, password);
+            Pracownik pracownik = new Pracownik(name, lastName, email, login, password);
             userList.add(pracownik);
+
+            value = "'" + name + "','" + lastName + "','" + email + "','" + login + "','" + password + "','" + email + "','" + "0";
+        }
+
+        try
+        {
+            db.Insert("uzytkownik",columns,value);
+        } catch (Exception e)
+        {
+            e.printStackTrace();
         }
     }
+
 }

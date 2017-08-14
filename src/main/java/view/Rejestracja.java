@@ -17,7 +17,6 @@ public class Rejestracja extends VerticalLayout implements View
 
     TextField textName;
     TextField textLastName;
-    RadioButtonGroup<String> optionGender;
     TextField textEmail;
     TextField textLogin;
     PasswordField pass;
@@ -57,9 +56,6 @@ public class Rejestracja extends VerticalLayout implements View
         textLastName = new TextField("Nazwisko");
         textLastName.setRequiredIndicatorVisible(true);
 
-        optionGender = new RadioButtonGroup<>("Płeć");
-        optionGender.setItems("Kobieta", "Mężczyzna", "Pozostałe");
-
         textEmail = new TextField("Adres E-mail");
         textEmail.setRequiredIndicatorVisible(true);
 
@@ -86,7 +82,6 @@ public class Rejestracja extends VerticalLayout implements View
         formLayout.addComponent(labelHeader);
         formLayout.addComponent(textName);
         formLayout.addComponent(textLastName);
-        formLayout.addComponent(optionGender);
         formLayout.addComponent(textEmail);
         formLayout.addComponent(textLogin);
         formLayout.addComponent(pass);
@@ -98,8 +93,9 @@ public class Rejestracja extends VerticalLayout implements View
 
         buttonConfirm.addClickListener((Button.ClickListener) clickEvent ->
         {
-            mainLogic.singUp(textName.getValue(), textLastName.getValue(), optionGender.getValue(), textEmail.getValue(),
-                    textLogin.getValue(), pass.getValue(), comboType.getCaption());
+           mainLogic.singUp(textName.getValue(), textLastName.getValue(), textEmail.getValue(), textLogin.getValue(), pass.getValue(), comboType.getCaption());
+
+
 
             Notification.show("Rejestracja przebiegła pomyślnie!");
 

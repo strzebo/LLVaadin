@@ -4,9 +4,9 @@ public class Pracownik extends User
 {
 
 
-    public Pracownik( String name, String lastName, String gender, String email, String login, String password)
+    public Pracownik( String name, String lastName, String email, String login, String password)
     {
-        super(name, lastName, gender, email, login, password);
+        super(name, lastName, email, login, password);
     }
 
     public String getType() { return "Pracownik"; }

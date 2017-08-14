@@ -12,20 +12,19 @@ public class DbConnection
     private Statement statement;
 
     private String cm = "";
-    private String server = "139.59.213.205";
-    private String port = "3306";
+    private String server = "";
+    private String port = "80";
     private String database = "toloto";
     private String login = "toloto";
     private String password = "LysiaCzek";
 
-    private void Initialize()
+    public void Initialize()
     {
         try
         {
-            //Class.forName("com.mysql.jdbc.Driver");
-            connection = DriverManager.getConnection("\"jdbc:mysql://" + server + ":" + port + "/" + database +"\"",login,password);
+            Class.forName("com.mysql.jdbc.Driver");
+            connection = DriverManager.getConnection("jdbc:mysql://178.62.84.129:80/toloto", login, password);
             statement = connection.createStatement();
-
         }
         catch(Exception ex)
         {
@@ -41,6 +40,7 @@ public class DbConnection
             cm = "INSERT INTO " + into + " (" + column + ") VALUES (" + value + ")";
             statement.executeUpdate(cm);
 
+            statement.close();
             connection.close();
         }
         catch(SQLException ex)
