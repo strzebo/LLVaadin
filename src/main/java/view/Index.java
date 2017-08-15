@@ -117,6 +117,7 @@ public class Index extends VerticalLayout implements View
 
     }
 
+
     public void addDashboardOption(String caption) {
         //set menu buttons
 
@@ -125,14 +126,58 @@ public class Index extends VerticalLayout implements View
         button.setStyleName("borderless");
         menuLayout.addComponent(button);
 
-        /*button.addClickListener(event -> {
+        button.addClickListener(event -> {
             contentLayout.removeAllComponents();    //remove everything from the content screen section
             addWelcomeText();
         });
-        */
+    }
+
+
+    public void navigatePanelAdministratora(String caption)
+    {
+        Button button = new Button(caption);
+        button.setWidth("100%");
+        button.setStyleName("borderless");
+        menuLayout.addComponent(button);
 
         button.addClickListener(event -> {
-            getUI().getNavigator().navigateTo("login");
+            getUI().getNavigator().navigateTo("paneladministratora");
+        } );
+    }
+
+    public void navigatePanelKierownika(String caption)
+    {
+        Button button = new Button(caption);
+        button.setWidth("100%");
+        button.setStyleName("borderless");
+        menuLayout.addComponent(button);
+
+        button.addClickListener(event -> {
+            getUI().getNavigator().navigateTo("panelkierownika");
+        } );
+    }
+
+    public void navigatePanelSprzedawcy(String caption)
+    {
+        Button button = new Button(caption);
+        button.setWidth("100%");
+        button.setStyleName("borderless");
+        menuLayout.addComponent(button);
+
+        button.addClickListener(event -> {
+            getUI().getNavigator().navigateTo("panelsprzedawcy");
+        } );
+    }
+
+    public void navigatePanelUzytkownika(String caption)
+    {
+        Button button = new Button(caption);
+        button.setWidth("100%");
+        button.setStyleName("borderless");
+        menuLayout.addComponent(button);
+
+        button.addClickListener(event -> {
+            getUI().getNavigator().navigateTo("paneluzytkownika");
         } );
     }
 
@@ -141,15 +186,6 @@ public class Index extends VerticalLayout implements View
             return new Kontakt();
         else if (componentName.equals("Trasy"))
             return new Trasy();
-        else if (componentName.equals("PanelAdministratora"))
-            return new PanelAdministratora();
-        else if (componentName.equals("PanelKierownika"))
-            return new PanelKierownika();
-        else if (componentName.equals("PanelSprzedawcy"))
-            return new PanelSprzedawcy();
-        else if (componentName.equals("PanelUzytkownika"))
-            return new PanelUzytkownika();
-
         else
             return new Index();
     }
@@ -172,19 +208,22 @@ public class Index extends VerticalLayout implements View
         contentLayout.removeAllComponents();
 
         setMenuTitle();
-        this.addDashboardOption("Login?");
-        //if (mainLogic.getCurrentUser().getType().equals("Pracownik")){
-        this.addMenuOption("Home","Index");
+
+
+        //if (mainLogic.getCurrentUser().getType().equals("Pracownik"))
+        this.addDashboardOption("Home");
+
         this.addMenuOption("Wyszukaj loty", "Trasy");
 
-        this.addMenuOption("Panel Użytkownika", "PanelUzytkownika");
-        this.addMenuOption("Panel Sprzedawcy", "PanelSprzedawcy");
-        this.addMenuOption("Panel Kierownika", "PanelKierownika");
-        this.addMenuOption("SuperUser :)", "PanelAdministratora");
+        this.navigatePanelUzytkownika("Panel Użytkownika");
+        this.navigatePanelSprzedawcy("Panel Sprzedawcy");
+        this.navigatePanelKierownika("Panel Kierownika");
+        this.navigatePanelAdministratora("SuperUser :)");
+
         this.addMenuOption("Kontakt", "Kontakt");
 
 
-       // }
+
 
         addWelcomeText();
     }
