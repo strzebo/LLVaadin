@@ -9,51 +9,44 @@ import logic.Main;
 public class PanelAdministratora extends VerticalLayout implements View
 {
     Main mainLogic = new Main();
-    Index index = new Index();
 
-    HorizontalLayout upperSection = new HorizontalLayout();
-    HorizontalLayout innerUpperSection = new HorizontalLayout();
-    HorizontalSplitPanel lowerSection = new HorizontalSplitPanel();
-    VerticalLayout menuLayout = new VerticalLayout();
-    HorizontalLayout menuTitle = new HorizontalLayout();
-    VerticalLayout contentLayout = new VerticalLayout();
+    private VerticalLayout menuLayout = new VerticalLayout();
+    private HorizontalLayout menuTitle = new HorizontalLayout();
+    private VerticalLayout contentLayout = new VerticalLayout();
 
-    Label labelHeader;
-    Label labelMenu;
-    Button buttonLogout;
-    Button buttonLogin;
-    Button buttonSingUp;
+    private Label labelMenu;
 
     public PanelAdministratora()
     {
-        labelHeader = new Label("");
+        Label labelHeader = new Label("");
         labelHeader.addStyleName("colored");
         labelHeader.addStyleName("h2");
         labelHeader.setSizeUndefined();
 
-        buttonLogin = new Button("Zaloguj się");
+        Button buttonLogin = new Button("Zaloguj się");
         buttonLogin.addStyleName("small");
         buttonLogin.addStyleName("friendly");
         buttonLogin.setSizeUndefined();
         buttonLogin.addClickListener((Button.ClickListener) event -> getUI().getNavigator().navigateTo("login"));
 
-        buttonSingUp = new Button("Zarejestruj się");
+        Button buttonSingUp = new Button("Zarejestruj się");
         buttonSingUp.addStyleName("small");
         buttonSingUp.addStyleName("friendly");
         buttonSingUp.setSizeUndefined();
         buttonSingUp.addClickListener((Button.ClickListener) event -> getUI().getNavigator().navigateTo("rejestracja"));
 
-        buttonLogout = new Button("Wyloguj się");
+        Button buttonLogout = new Button("Wyloguj się");
         buttonLogout.addStyleName("small");
         buttonLogout.addStyleName("danger");
         buttonLogout.setSizeUndefined();
         buttonLogout.addClickListener((Button.ClickListener) event -> getUI().getNavigator().navigateTo("index"));
 
-        labelMenu = new Label("Super Menu");
+        labelMenu = new Label("Menu");
         labelMenu.addStyleName("colored");
         labelMenu.addStyleName("h2");
 
         //Sections
+        HorizontalLayout innerUpperSection = new HorizontalLayout();
         innerUpperSection.addComponent(labelHeader);
         innerUpperSection.addComponent(buttonLogin);
         innerUpperSection.addComponent(buttonSingUp);
@@ -66,6 +59,7 @@ public class PanelAdministratora extends VerticalLayout implements View
         innerUpperSection.setComponentAlignment(buttonSingUp, Alignment.MIDDLE_RIGHT);
         innerUpperSection.setComponentAlignment(buttonLogout, Alignment.MIDDLE_RIGHT);
 
+        HorizontalLayout upperSection = new HorizontalLayout();
         upperSection.setSizeFull();
         upperSection.addComponent(innerUpperSection);
 
@@ -80,6 +74,7 @@ public class PanelAdministratora extends VerticalLayout implements View
         menuLayout.setWidth("100%");
         menuLayout.setComponentAlignment(menuTitle, Alignment.MIDDLE_CENTER);
 
+        HorizontalSplitPanel lowerSection = new HorizontalSplitPanel();
         lowerSection.addComponent(menuLayout);
         lowerSection.addComponent(contentLayout);
         contentLayout.setSizeFull();
@@ -94,15 +89,82 @@ public class PanelAdministratora extends VerticalLayout implements View
         setExpandRatio(lowerSection,1);
     }
 
+    private void setMenuTitlePA()
+    {
+        menuTitle.addComponent(labelMenu);
+        menuLayout.addComponent(menuTitle);
+        menuLayout.setWidth("100%");
+        menuLayout.setComponentAlignment(menuTitle, Alignment.MIDDLE_CENTER);
+
+    }
+
+    private void addWelcomeTextPA(String value)
+    {
+        Label labelTitle = new Label("Welcome !"); //+ mainLogic.getCurrentUser().getName() +
+        labelTitle.addStyleName("h1");
+        labelTitle.addStyleName("colored");
+
+        labelTitle.setValue(value);// + mainLogic.getCurrentUser().getType());
+
+        contentLayout.addComponent(labelTitle);
+        contentLayout.setMargin(new MarginInfo(false, false, false, true));
+    }
+
+    private void navigateHomePA(String caption)
+    {
+        Button button = new Button(caption);
+        button.setWidth("100%");
+        button.setStyleName("borderless");
+        menuLayout.addComponent(button);
+
+        button.addClickListener(event -> getUI().getNavigator().navigateTo("index"));
+    }
+
+    private Component getComponentPA(String componentName)
+    {
+        if (componentName.equals("ZmianaDanych"))
+            return new ZmianaDanych();
+        else if (componentName.equals("Konta"))
+            return new Konta();
+        else if (componentName.equals("Trasy"))
+            return new Trasy();
+        else if (componentName.equals("Rezerwacja"))
+            return new Rezerwacja();
+        else
+            return new Index();
+    }
+
+    private void addMenuOptionPA(String caption, String componentName)
+    {
+        Button button = new Button(caption);
+
+        button.setWidth("100%");
+        button.setStyleName("borderless");
+
+        menuLayout.addComponent(button);
+        button.addClickListener((Button.ClickListener) event ->
+        {
+            contentLayout.removeAllComponents();
+            addWelcomeTextPA(caption);
+            contentLayout.addComponent(getComponentPA(componentName));
+        });
+    }
+
     @Override
     public void enter(ViewChangeListener.ViewChangeEvent viewChangeEvent)
     {
         menuLayout.removeAllComponents();
         contentLayout.removeAllComponents();
 
+        this.setMenuTitlePA();
 
+        this.navigateHomePA("Home");
 
+        this.addMenuOptionPA("Zarządzaj rezerwacją", "Rezerwacja");
+        this.addMenuOptionPA("Zarządzaj kontami", "Konta");
+        this.addMenuOptionPA("Zarządzaj trasami", "Trasy");
+        this.addMenuOptionPA("Zmiana danych", "ZmianaDanych");
 
-
+        this.addWelcomeTextPA("Super panel");
     }
 }

@@ -10,42 +10,31 @@ public class Index extends VerticalLayout implements View
 {
     Main mainLogic = new Main();
 
-    HorizontalLayout upperSection = new HorizontalLayout();
-    HorizontalLayout innerUpperSection = new HorizontalLayout();
-    HorizontalSplitPanel lowerSection = new HorizontalSplitPanel();
-    VerticalLayout menuLayout = new VerticalLayout();
-    HorizontalLayout menuTitle = new HorizontalLayout();
-    VerticalLayout contentLayout = new VerticalLayout();
-
-    Label labelHeader;
-    Label labelMenu;
-    Button buttonLogout;
-    Button buttonLogin;
-    Button buttonSingUp;
+    private VerticalLayout menuLayout = new VerticalLayout();
+    private HorizontalLayout menuTitle = new HorizontalLayout();
+    private VerticalLayout contentLayout = new VerticalLayout();
+    private Label labelMenu;
 
     public Index()
     {
-        //UI
-
-
-        labelHeader = new Label("");
+        Label labelHeader = new Label("");
         labelHeader.addStyleName("colored");
         labelHeader.addStyleName("h2");
         labelHeader.setSizeUndefined();
 
-        buttonLogin = new Button("Zaloguj się");
+        Button buttonLogin = new Button("Zaloguj się");
         buttonLogin.addStyleName("small");
         buttonLogin.addStyleName("friendly");
         buttonLogin.setSizeUndefined();
         buttonLogin.addClickListener((Button.ClickListener) event -> getUI().getNavigator().navigateTo("login"));
 
-        buttonSingUp = new Button("Zarejestruj się");
+        Button buttonSingUp = new Button("Zarejestruj się");
         buttonSingUp.addStyleName("small");
         buttonSingUp.addStyleName("friendly");
         buttonSingUp.setSizeUndefined();
         buttonSingUp.addClickListener((Button.ClickListener) event -> getUI().getNavigator().navigateTo("rejestracja"));
 
-        buttonLogout = new Button("Wyloguj się");
+        Button buttonLogout = new Button("Wyloguj się");
         buttonLogout.addStyleName("small");
         buttonLogout.addStyleName("danger");
         buttonLogout.setSizeUndefined();
@@ -55,7 +44,7 @@ public class Index extends VerticalLayout implements View
         labelMenu.addStyleName("colored");
         labelMenu.addStyleName("h2");
 
-        //Sections
+        HorizontalLayout innerUpperSection = new HorizontalLayout();
         innerUpperSection.addComponent(labelHeader);
         innerUpperSection.addComponent(buttonLogin);
         innerUpperSection.addComponent(buttonSingUp);
@@ -68,6 +57,7 @@ public class Index extends VerticalLayout implements View
         innerUpperSection.setComponentAlignment(buttonSingUp, Alignment.MIDDLE_RIGHT);
         innerUpperSection.setComponentAlignment(buttonLogout, Alignment.MIDDLE_RIGHT);
 
+        HorizontalLayout upperSection = new HorizontalLayout();
         upperSection.setSizeFull();
         upperSection.addComponent(innerUpperSection);
 
@@ -76,12 +66,12 @@ public class Index extends VerticalLayout implements View
         upperSection.addStyleName("borderBottom");
         upperSection.setHeight(4, UNITS_EM);
 
-        //menu
         menuTitle.addComponent(labelMenu);
         menuLayout.addComponent(menuTitle);
         menuLayout.setWidth("100%");
         menuLayout.setComponentAlignment(menuTitle, Alignment.MIDDLE_CENTER);
 
+        HorizontalSplitPanel lowerSection = new HorizontalSplitPanel();
         lowerSection.addComponent(menuLayout);
         lowerSection.addComponent(contentLayout);
         contentLayout.setSizeFull();
@@ -133,9 +123,9 @@ public class Index extends VerticalLayout implements View
     }
 
     //region navigate
-    public void navigatePanelAdministratora(String caption)
+    private void navigatePanelAdministratora()
     {
-        Button button = new Button(caption);
+        Button button = new Button("SuperUser");
         button.setWidth("100%");
         button.setStyleName("borderless");
         menuLayout.addComponent(button);
@@ -143,9 +133,9 @@ public class Index extends VerticalLayout implements View
         button.addClickListener(event -> getUI().getNavigator().navigateTo("paneladministratora"));
     }
 
-    public void navigatePanelKierownika(String caption)
+    private void navigatePanelKierownika()
     {
-        Button button = new Button(caption);
+        Button button = new Button("Panel kierownika");
         button.setWidth("100%");
         button.setStyleName("borderless");
         menuLayout.addComponent(button);
@@ -153,9 +143,9 @@ public class Index extends VerticalLayout implements View
         button.addClickListener(event -> getUI().getNavigator().navigateTo("panelkierownika"));
     }
 
-    public void navigatePanelSprzedawcy(String caption)
+    private void navigatePanelSprzedawcy()
     {
-        Button button = new Button(caption);
+        Button button = new Button("Panel sprzedawcy");
         button.setWidth("100%");
         button.setStyleName("borderless");
         menuLayout.addComponent(button);
@@ -163,9 +153,9 @@ public class Index extends VerticalLayout implements View
         button.addClickListener(event -> getUI().getNavigator().navigateTo("panelsprzedawcy"));
     }
 
-    public void navigatePanelUzytkownika(String caption)
+    private void navigatePanelUzytkownika()
     {
-        Button button = new Button(caption);
+        Button button = new Button("Panel użytkownika");
         button.setWidth("100%");
         button.setStyleName("borderless");
         menuLayout.addComponent(button);
@@ -215,10 +205,10 @@ public class Index extends VerticalLayout implements View
 
         this.addMenuOption("Wyszukaj loty", "Trasy");
 
-        this.navigatePanelUzytkownika("Panel użytkownika");
-        this.navigatePanelSprzedawcy("Panel Sprzedawcy");
-        this.navigatePanelKierownika("Panel Kierownika");
-        this.navigatePanelAdministratora("SuperUser :)");
+        this.navigatePanelUzytkownika();
+        this.navigatePanelSprzedawcy();
+        this.navigatePanelKierownika();
+        this.navigatePanelAdministratora();
 
         this.addMenuOption("Kontakt", "Kontakt");
 

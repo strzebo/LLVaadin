@@ -25,12 +25,12 @@ public class MyUI extends UI
         navigator.addView("paneluzytkownika", new PanelUzytkownika());
         navigator.addView("panelkierownika", new PanelKierownika());
         navigator.addView("panelsprzedawcy", new PanelSprzedawcy());
-        navigator.addView("guest", new Guest());
         navigator.addView("zmianadanych", new ZmianaDanych());
         navigator.addView("rejestracja", new Rejestracja());
         navigator.addView("rezerwacja", new Rezerwacja());
         navigator.addView("trasy", new Trasy());
         navigator.addView("historiaperacji", new HistoriaOperacji());
+        navigator.addView("konta", new Konta());
 
         navigator.navigateTo("login");
     }

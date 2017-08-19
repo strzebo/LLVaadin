@@ -4,13 +4,13 @@ import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener;
 import com.vaadin.ui.VerticalLayout;
 
-public class Guest extends VerticalLayout implements View
+public class Konta extends VerticalLayout implements View
 {
-    public Guest()
+    public Konta()
     {
 
     }
-
+    
     @Override
     public void enter(ViewChangeListener.ViewChangeEvent viewChangeEvent)
     {

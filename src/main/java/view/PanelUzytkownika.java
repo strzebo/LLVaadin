@@ -48,7 +48,7 @@ public class PanelUzytkownika extends VerticalLayout implements View
         buttonLogout.setSizeUndefined();
         buttonLogout.addClickListener((Button.ClickListener) event -> getUI().getNavigator().navigateTo("index"));
 
-        labelMenu = new Label("Menu użytkownika");
+        labelMenu = new Label("Menu");
         labelMenu.addStyleName("colored");
         labelMenu.addStyleName("h2");
 
@@ -91,10 +91,9 @@ public class PanelUzytkownika extends VerticalLayout implements View
         setSizeFull();
 
         setExpandRatio(lowerSection,1);
-
     }
 
-    public void setMenuTitlePU()
+    private void setMenuTitlePU()
     {
         menuTitle.addComponent(labelMenu);
         menuLayout.addComponent(menuTitle);
@@ -103,7 +102,7 @@ public class PanelUzytkownika extends VerticalLayout implements View
 
     }
 
-    public void addWelcomeTextPU(String value)
+    private void addWelcomeTextPU(String value)
     {
         Label labelTitle = new Label("Welcome !"); //+ mainLogic.getCurrentUser().getName() +
         labelTitle.addStyleName("h1");
@@ -115,23 +114,7 @@ public class PanelUzytkownika extends VerticalLayout implements View
         contentLayout.setMargin(new MarginInfo(false, false, false, true));
     }
 
-    public void addDashboardOptionPU(String caption)
-    {
-
-        Button button = new Button(caption);
-        button.setWidth("100%");
-        button.setStyleName("borderless");
-        menuLayout.addComponent(button);
-
-        button.addClickListener(event ->
-        {
-            contentLayout.removeAllComponents();
-            addWelcomeTextPU("Panel użytkownika");
-        });
-    }
-
-    //region navigate
-    public void navigateHomePU(String caption)
+     private void navigateHomePU(String caption)
     {
         Button button = new Button(caption);
         button.setWidth("100%");
@@ -141,16 +124,9 @@ public class PanelUzytkownika extends VerticalLayout implements View
         button.addClickListener(event -> getUI().getNavigator().navigateTo("index"));
     }
 
-
-    //endregion
-
-    public Component getComponentPU(String componentName)
+    private Component getComponentPU(String componentName)
     {
-        if (componentName.equals("Kontakt"))
-            return new Kontakt();
-        else if (componentName.equals("Trasy"))
-            return new Trasy();
-        else if (componentName.equals("ZmianaDanych"))
+        if (componentName.equals("ZmianaDanych"))
             return new ZmianaDanych();
         else if (componentName.equals("Rezerwacja"))
             return new Rezerwacja();
@@ -160,7 +136,7 @@ public class PanelUzytkownika extends VerticalLayout implements View
             return new Index();
     }
 
-    public void addMenuOptionPU(String caption, String componentName)
+    private void addMenuOptionPU(String caption, String componentName)
     {
         Button button = new Button(caption);
 
@@ -185,15 +161,11 @@ public class PanelUzytkownika extends VerticalLayout implements View
 
         this.setMenuTitlePU();
 
-        this.addDashboardOptionPU("Panel użytkownika");
-
         this.navigateHomePU("Home");
 
-        this.addMenuOptionPU("Wyszukaj loty", "Trasy");
         this.addMenuOptionPU("Moje rezerwacje", "Rezerwacja");
         this.addMenuOptionPU("Moja historia","HistoriaOperacji");
         this.addMenuOptionPU("Zmiana danych", "ZmianaDanych");
-        this.addMenuOptionPU("Kontakt", "Kontakt");
 
         this.addWelcomeTextPU("Panel użytkownika");
     }
