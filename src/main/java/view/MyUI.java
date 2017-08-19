@@ -30,6 +30,7 @@ public class MyUI extends UI
         navigator.addView("rejestracja", new Rejestracja());
         navigator.addView("rezerwacja", new Rezerwacja());
         navigator.addView("trasy", new Trasy());
+        navigator.addView("historiaperacji", new HistoriaOperacji());
 
         navigator.navigateTo("login");
     }

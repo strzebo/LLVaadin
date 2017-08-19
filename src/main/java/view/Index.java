@@ -1,6 +1,5 @@
 package view;
 
-
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener;
 import com.vaadin.shared.ui.MarginInfo;
@@ -27,6 +26,7 @@ public class Index extends VerticalLayout implements View
     public Index()
     {
         //UI
+
 
         labelHeader = new Label("");
         labelHeader.addStyleName("colored");
@@ -71,7 +71,7 @@ public class Index extends VerticalLayout implements View
         upperSection.setSizeFull();
         upperSection.addComponent(innerUpperSection);
 
-        upperSection.setMargin(new MarginInfo(false, true, false, false));
+        upperSection.setMargin(new MarginInfo(false, false, false, false));
         upperSection.setComponentAlignment(innerUpperSection, Alignment.TOP_RIGHT);
         upperSection.addStyleName("borderBottom");
         upperSection.setHeight(4, UNITS_EM);
@@ -96,43 +96,43 @@ public class Index extends VerticalLayout implements View
         setExpandRatio(lowerSection,1);
     }
 
-    public void setMenuTitle()
+    private void setMenuTitle()
     {
         menuTitle.addComponent(labelMenu);
         menuLayout.addComponent(menuTitle);
         menuLayout.setWidth("100%");
         menuLayout.setComponentAlignment(menuTitle, Alignment.MIDDLE_CENTER);
+
     }
 
-    public void addWelcomeText()
+    private void addWelcomeText(String value)
     {
         Label labelTitle = new Label("Welcome !"); //+ mainLogic.getCurrentUser().getName() +
         labelTitle.addStyleName("h1");
         labelTitle.addStyleName("colored");
 
-        labelTitle.setValue("Zalogowany ziomeczku");// + mainLogic.getCurrentUser().getType());
+        labelTitle.setValue(value);// + mainLogic.getCurrentUser().getType());
 
         contentLayout.addComponent(labelTitle);
         contentLayout.setMargin(new MarginInfo(false, false, false, true));
-
     }
 
-
-    public void addDashboardOption(String caption) {
-        //set menu buttons
+    private void addDashboardOption(String caption)
+    {
 
         Button button = new Button(caption);
         button.setWidth("100%");
         button.setStyleName("borderless");
         menuLayout.addComponent(button);
 
-        button.addClickListener(event -> {
-            contentLayout.removeAllComponents();    //remove everything from the content screen section
-            addWelcomeText();
+        button.addClickListener(event ->
+        {
+            contentLayout.removeAllComponents();
+            addWelcomeText("Home");
         });
     }
 
-
+    //region navigate
     public void navigatePanelAdministratora(String caption)
     {
         Button button = new Button(caption);
@@ -140,9 +140,7 @@ public class Index extends VerticalLayout implements View
         button.setStyleName("borderless");
         menuLayout.addComponent(button);
 
-        button.addClickListener(event -> {
-            getUI().getNavigator().navigateTo("paneladministratora");
-        } );
+        button.addClickListener(event -> getUI().getNavigator().navigateTo("paneladministratora"));
     }
 
     public void navigatePanelKierownika(String caption)
@@ -152,9 +150,7 @@ public class Index extends VerticalLayout implements View
         button.setStyleName("borderless");
         menuLayout.addComponent(button);
 
-        button.addClickListener(event -> {
-            getUI().getNavigator().navigateTo("panelkierownika");
-        } );
+        button.addClickListener(event -> getUI().getNavigator().navigateTo("panelkierownika"));
     }
 
     public void navigatePanelSprzedawcy(String caption)
@@ -164,9 +160,7 @@ public class Index extends VerticalLayout implements View
         button.setStyleName("borderless");
         menuLayout.addComponent(button);
 
-        button.addClickListener(event -> {
-            getUI().getNavigator().navigateTo("panelsprzedawcy");
-        } );
+        button.addClickListener(event -> getUI().getNavigator().navigateTo("panelsprzedawcy"));
     }
 
     public void navigatePanelUzytkownika(String caption)
@@ -176,12 +170,12 @@ public class Index extends VerticalLayout implements View
         button.setStyleName("borderless");
         menuLayout.addComponent(button);
 
-        button.addClickListener(event -> {
-            getUI().getNavigator().navigateTo("paneluzytkownika");
-        } );
+        button.addClickListener(event -> getUI().getNavigator().navigateTo("paneluzytkownika"));
     }
+    //endregion
 
-    public Component getComponent(String componentName) {
+    private Component getComponent(String componentName)
+    {
         if (componentName.equals("Kontakt"))
             return new Kontakt();
         else if (componentName.equals("Trasy"))
@@ -190,41 +184,44 @@ public class Index extends VerticalLayout implements View
             return new Index();
     }
 
-    public void addMenuOption(String caption, String componentName) {
+    private void addMenuOption(String caption, String componentName)
+    {
         Button button = new Button(caption);
+
         button.setWidth("100%");
         button.setStyleName("borderless");
+
         menuLayout.addComponent(button);
-        button.addClickListener((Button.ClickListener) event -> {
+        button.addClickListener((Button.ClickListener) event ->
+        {
             contentLayout.removeAllComponents();
+            addWelcomeText(caption);
             contentLayout.addComponent(getComponent(componentName));
         });
     }
 
-    @Override
-    public void enter(ViewChangeListener.ViewChangeEvent event) {
 
+
+    @Override
+    public void enter(ViewChangeListener.ViewChangeEvent event)
+    {
         menuLayout.removeAllComponents();
         contentLayout.removeAllComponents();
 
-        setMenuTitle();
-
+        this.setMenuTitle();
 
         //if (mainLogic.getCurrentUser().getType().equals("Pracownik"))
         this.addDashboardOption("Home");
 
         this.addMenuOption("Wyszukaj loty", "Trasy");
 
-        this.navigatePanelUzytkownika("Panel Użytkownika");
+        this.navigatePanelUzytkownika("Panel użytkownika");
         this.navigatePanelSprzedawcy("Panel Sprzedawcy");
         this.navigatePanelKierownika("Panel Kierownika");
         this.navigatePanelAdministratora("SuperUser :)");
 
         this.addMenuOption("Kontakt", "Kontakt");
 
-
-
-
-        addWelcomeText();
+        this.addWelcomeText("Home");
     }
 }
