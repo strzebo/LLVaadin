@@ -12,18 +12,13 @@ public class Rejestracja extends VerticalLayout implements View
 {
     Main mainLogic = new Main();
 
-    Label labelTitle;
-    Label labelHeader;
+    private TextField textName;
+    private TextField textLastName;
+    private TextField textEmail;
+    private TextField textLogin;
+    private PasswordField pass;
 
-    TextField textName;
-    TextField textLastName;
-    TextField textEmail;
-    TextField textLogin;
-    PasswordField pass;
-
-    ComboBox comboType;
-    Button buttonConfirm;
-    Button buttonCancel;
+    private ComboBox comboType;
 
 
     public Rejestracja()
@@ -39,14 +34,14 @@ public class Rejestracja extends VerticalLayout implements View
         typ.add("Użytkownik");
         typ.add("Pracownik");
 
-        labelTitle = new Label("Rejestracja");
+        Label labelTitle = new Label("Rejestracja");
         labelTitle.addStyleName("h1");
 
         formLayout.setMargin(false);
         formLayout.setWidth("35%");
         formLayout.addStyleName("light");
 
-        labelHeader = new Label("Dane Personalne");
+        Label labelHeader = new Label("Dane Personalne");
         labelHeader.addStyleName("h2");
         labelHeader.addStyleName("colored");;
 
@@ -88,7 +83,7 @@ public class Rejestracja extends VerticalLayout implements View
         formLayout.addComponent(comboType);
         formLayout.addComponent(footer);
 
-        buttonConfirm = new Button("Potwierdź");
+        Button buttonConfirm = new Button("Potwierdź");
         buttonConfirm.addStyleName("primary");
 
         buttonConfirm.addClickListener((Button.ClickListener) clickEvent ->
@@ -102,7 +97,7 @@ public class Rejestracja extends VerticalLayout implements View
             getUI().getNavigator().navigateTo("login");
         });
 
-        buttonCancel = new Button("Anuluj");
+        Button buttonCancel = new Button("Anuluj");
         buttonCancel.addStyleName("danger");
 
         buttonCancel.addClickListener((Button.ClickListener) clickEvent -> getUI().getNavigator().navigateTo("login"));
