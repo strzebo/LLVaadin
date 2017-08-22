@@ -102,7 +102,6 @@ public class Trasy extends VerticalLayout implements View
 
         footer.addComponent(gridTrasy);
         this.addComponent(footer);
-
     }
 
     @Override
