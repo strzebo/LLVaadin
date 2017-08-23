@@ -1,9 +1,6 @@
 package logic;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 
 
 public class DbConnection
@@ -24,6 +21,29 @@ public class DbConnection
         {
             System.out.println("Error : " + ex);
         }
+    }
+
+    public void Select(String select, String from, String where) throws SQLException
+    {
+        Initialize();
+
+        if(select.isEmpty())
+            select = "*";
+
+        if(where.isEmpty())
+            where = "1";
+
+        cm = "SELECT " + select + " FROM " + from + " WHERE " + where;
+        //statement.execute(cm);
+        ResultSet rs = statement.executeQuery(cm);
+
+        while(rs.next())
+        {
+            String user = rs.getString("ID");
+            System.out.println("ID usera : " + user + "\n");
+        }
+
+        connection.close();
     }
 
     public void Insert(String into, String column, String value)
@@ -74,4 +94,5 @@ public class DbConnection
             System.out.println("Error : " + ex);
         }
     }
+
 }
