@@ -17,7 +17,7 @@ public class DbConnection
         try
         {
             Class.forName("com.mysql.jdbc.Driver");
-            connection = DriverManager.getConnection("jdbc:mysql://178.62.84.129:80/toloto", "toloto", "LysiaCzek");
+            connection = DriverManager.getConnection("jdbc:mysql://165.227.148.102:3306", "toloto", "ToLotoWysoko$4");
             statement = connection.createStatement();
         }
         catch(Exception ex)
