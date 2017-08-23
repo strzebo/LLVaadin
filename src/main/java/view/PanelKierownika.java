@@ -79,7 +79,7 @@ public class PanelKierownika extends VerticalLayout implements View
         lowerSection.addComponent(contentLayout);
         contentLayout.setSizeFull();
         lowerSection.setSizeFull();
-        lowerSection.setSplitPosition(15);
+        lowerSection.setSplitPosition(17);
 
         addComponent(upperSection);
         addComponent(lowerSection);

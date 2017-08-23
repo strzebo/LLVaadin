@@ -50,38 +50,37 @@ public class Main
         String columns = "Imie, Nazwisko, Login, Haslo, Email" + boolowska;
         String value = "";
 
-        switch(type)
+        if (type.equals("Użytkownik"))
         {
-            case "Użytkownik":
-                Uzytkownik uzytkownik = new Uzytkownik(name, lastName, email, login, password);
-                userList.add(uzytkownik);
+            Uzytkownik uzytkownik = new Uzytkownik(name, lastName, email, login, password);
+            userList.add(uzytkownik);
 
-                value = "'" + name + "','" + lastName + "','" + email + "','" + login + "','" + password + "','" + email + "','" + "1";
-                break;
-            case "Sprzedawca":
-                Sprzedawca sprzedawca = new Sprzedawca(name, lastName, email, login, password);
-                userList.add(sprzedawca);
+            value = "'" + name + "','" + lastName + "','" + email + "','" + login + "','" + password + "','" + email + "','" + "1";
 
-                value = "'" + name + "','" + lastName + "','" + email + "','" + login + "','" + password + "','" + email + "','" + "0";
-                break;
-            case "Kieroniwk":
-                Kierownik kierownik = new Kierownik(name, lastName, email, login, password);
-                userList.add(kierownik);
+        } else if (type.equals("Sprzedawca"))
+        {
+            Sprzedawca sprzedawca = new Sprzedawca(name, lastName, email, login, password);
+            userList.add(sprzedawca);
 
-                value = "'" + name + "','" + lastName + "','" + email + "','" + login + "','" + password + "','" + email + "','" + "0";
-                break;
-            case "Administrator":
-                Administrator administrator = new Administrator(name, lastName, email, login, password);
-                userList.add(administrator);
+            value = "'" + name + "','" + lastName + "','" + email + "','" + login + "','" + password + "','" + email + "','" + "0";
 
-                value = "'" + name + "','" + lastName + "','" + email + "','" + login + "','" + password + "','" + email + "','" + "0";
-                break;
-            default:
-                return;
+        } else if (type.equals("Kieroniwk"))
+        {
+            Kierownik kierownik = new Kierownik(name, lastName, email, login, password);
+            userList.add(kierownik);
+
+            value = "'" + name + "','" + lastName + "','" + email + "','" + login + "','" + password + "','" + email + "','" + "0";
+
+        } else if (type.equals("Administrator"))
+        {
+            Administrator administrator = new Administrator(name, lastName, email, login, password);
+            userList.add(administrator);
+
+            value = "'" + name + "','" + lastName + "','" + email + "','" + login + "','" + password + "','" + email + "','" + "0";
+
         }
 
            db.Insert("uzytkownik",columns,value);
-            //db.Select("");
     }
 
     public boolean logIn(String login, String password) throws SQLException
