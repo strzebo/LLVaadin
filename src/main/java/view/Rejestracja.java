@@ -6,6 +6,7 @@ import com.vaadin.shared.ui.MarginInfo;
 import com.vaadin.ui.*;
 import logic.Main;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class Rejestracja extends VerticalLayout implements View
@@ -32,7 +33,9 @@ public class Rejestracja extends VerticalLayout implements View
 
         ArrayList<String> typ = new ArrayList<>();
         typ.add("Użytkownik");
-        typ.add("Pracownik");
+        typ.add("Sprzedawca");
+        typ.add("Kierownik");
+        typ.add("Administrator");
 
         Label labelTitle = new Label("Rejestracja");
         labelTitle.addStyleName("h1");
@@ -88,8 +91,13 @@ public class Rejestracja extends VerticalLayout implements View
 
         buttonConfirm.addClickListener((Button.ClickListener) clickEvent ->
         {
-           mainLogic.singUp(textName.getValue(), textLastName.getValue(), textEmail.getValue(), textLogin.getValue(), pass.getValue(), comboType.getCaption());
-
+            try
+            {
+                mainLogic.singUp(textName.getValue(), textLastName.getValue(), textEmail.getValue(), textLogin.getValue(), pass.getValue(), comboType.getCaption());
+            } catch (SQLException e)
+            {
+                e.printStackTrace();
+            }
 
 
             Notification.show("Rejestracja przebiegła pomyślnie!");

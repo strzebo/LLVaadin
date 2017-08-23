@@ -53,6 +53,8 @@ public class Login extends VerticalLayout implements View
         setComponentAlignment(loginPanel,Alignment.MIDDLE_CENTER);
         setHeight("100%");
 
+
+
     }
 
     @Override

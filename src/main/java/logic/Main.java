@@ -1,5 +1,6 @@
 package logic;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class Main
@@ -11,19 +12,19 @@ public class Main
     //get
     public ArrayList<User> getUserList() {   return userList;    }
 
-    public User getCurrentUser() {  return this.currentUser;    }
+    public User getCurrentUser() {  return currentUser;    }
 
-    public ArrayList<Pracownik> getPracownikList()
+    public ArrayList<Sprzedawca> getSprzedawcakList()
     {
-        ArrayList<Pracownik> pracownikList = new ArrayList<>();
+        ArrayList<Sprzedawca> sprzedawcaList = new ArrayList<>();
 
-        for(User pracownik : userList)
+        for(User sprzedawca : userList)
         {
-            if (pracownik instanceof Pracownik)
-                pracownikList.add((Pracownik) pracownik);
+            if (sprzedawca instanceof Sprzedawca)
+                sprzedawcaList.add((Sprzedawca) sprzedawca);
         }
 
-        return pracownikList;
+        return sprzedawcaList;
     }
 
     public ArrayList<Uzytkownik> getUzytkownikList()
@@ -41,7 +42,7 @@ public class Main
 
 
     //rejestracja -> dodać zapytanie SQL
-    public void singUp(String name, String lastName, String email, String login, String password, String type)
+    public void singUp(String name, String lastName, String email, String login, String password, String type) throws SQLException
     {
         DbConnection db = new DbConnection();
         String boolowska = "";
@@ -49,28 +50,48 @@ public class Main
         String columns = "Imie, Nazwisko, Login, Haslo, Email" + boolowska;
         String value = "";
 
-        if(type.equals("Użytkownik"))
+        switch(type)
         {
-            Uzytkownik uzytkownik = new Uzytkownik(name, lastName, email, login, password);
-            userList.add(uzytkownik);
+            case "Użytkownik":
+                Uzytkownik uzytkownik = new Uzytkownik(name, lastName, email, login, password);
+                userList.add(uzytkownik);
 
-            value = "'" + name + "','" + lastName + "','" + email + "','" + login + "','" + password + "','" + email + "','" + "1";
-        }
-        else
-        {
-            Pracownik pracownik = new Pracownik(name, lastName, email, login, password);
-            userList.add(pracownik);
+                value = "'" + name + "','" + lastName + "','" + email + "','" + login + "','" + password + "','" + email + "','" + "1";
+                break;
+            case "Sprzedawca":
+                Sprzedawca sprzedawca = new Sprzedawca(name, lastName, email, login, password);
+                userList.add(sprzedawca);
 
-            value = "'" + name + "','" + lastName + "','" + email + "','" + login + "','" + password + "','" + email + "','" + "0";
+                value = "'" + name + "','" + lastName + "','" + email + "','" + login + "','" + password + "','" + email + "','" + "0";
+                break;
+            case "Kieroniwk":
+                Kierownik kierownik = new Kierownik(name, lastName, email, login, password);
+                userList.add(kierownik);
+
+                value = "'" + name + "','" + lastName + "','" + email + "','" + login + "','" + password + "','" + email + "','" + "0";
+                break;
+            case "Administrator":
+                Administrator administrator = new Administrator(name, lastName, email, login, password);
+                userList.add(administrator);
+
+                value = "'" + name + "','" + lastName + "','" + email + "','" + login + "','" + password + "','" + email + "','" + "0";
+                break;
+            default:
+                return;
         }
 
-        try
-        {
-            db.Insert("uzytkownik",columns,value);
-        } catch (Exception e)
-        {
-            e.printStackTrace();
-        }
+           db.Insert("uzytkownik",columns,value);
+            //db.Select("");
+    }
+
+    public boolean logIn(String login, String password) throws SQLException
+    {
+        DbConnection db = new DbConnection();
+
+        db.Select("","uzytkownik","Login = '" + login + "' AND Haslo = '" + password +"'");
+
+        return false;
+
     }
 
 }
