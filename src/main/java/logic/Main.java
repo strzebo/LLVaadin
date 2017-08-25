@@ -42,45 +42,20 @@ public class Main
 
 
     //rejestracja -> dodać zapytanie SQL
-    public void singUp(String name, String lastName, String email, String login, String password, String type) throws SQLException
+    public void singUp(String name, String lastName, String email, String password, String address, String phoneNumber, String idNumber) throws SQLException
     {
         DbConnection db = new DbConnection();
-        String boolowska = "";
+        //String boolowska = "";
 
-        String columns = "Imie, Nazwisko, Login, Haslo, Email" + boolowska;
-        String value = "";
+        String columns = "Imie, Nazwisko, Email, Haslo, Adres, Telefon, NrDokumentu";
+        String value;
 
-        if (type.equals("Użytkownik"))
-        {
-            Uzytkownik uzytkownik = new Uzytkownik(name, lastName, email, login, password);
-            userList.add(uzytkownik);
+        Uzytkownik uzytkownik = new Uzytkownik(name, lastName, email, password, address, phoneNumber, idNumber);
+        userList.add(uzytkownik);
 
-            value = "'" + name + "','" + lastName + "','" + email + "','" + login + "','" + password + "','" + email + "','" + "1";
+        value = "'" + name + "', '" + lastName + "', '" + email + "', '" + password + "', '" + address + "', '" + phoneNumber + "','" + idNumber + "'";
 
-        } else if (type.equals("Sprzedawca"))
-        {
-            Sprzedawca sprzedawca = new Sprzedawca(name, lastName, email, login, password);
-            userList.add(sprzedawca);
-
-            value = "'" + name + "','" + lastName + "','" + email + "','" + login + "','" + password + "','" + email + "','" + "0";
-
-        } else if (type.equals("Kieroniwk"))
-        {
-            Kierownik kierownik = new Kierownik(name, lastName, email, login, password);
-            userList.add(kierownik);
-
-            value = "'" + name + "','" + lastName + "','" + email + "','" + login + "','" + password + "','" + email + "','" + "0";
-
-        } else if (type.equals("Administrator"))
-        {
-            Administrator administrator = new Administrator(name, lastName, email, login, password);
-            userList.add(administrator);
-
-            value = "'" + name + "','" + lastName + "','" + email + "','" + login + "','" + password + "','" + email + "','" + "0";
-
-        }
-
-           db.Insert("uzytkownik",columns,value);
+        db.Insert("uzytkownik",columns,value);
     }
 
     public boolean logIn(String login, String password) throws SQLException
