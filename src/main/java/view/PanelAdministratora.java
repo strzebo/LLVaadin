@@ -121,18 +121,18 @@ public class PanelAdministratora extends VerticalLayout implements View
     }
 
     private Component getComponentPA(String componentName)
-    {
-        if (componentName.equals("ZmianaDanych"))
-            return new ZmianaDanych();
-        else if (componentName.equals("Konta"))
-            return new Konta();
-        else if (componentName.equals("Trasy"))
-            return new Trasy();
-        else if (componentName.equals("Rezerwacja"))
-            return new Rezerwacja();
-        else
-            return new Index();
-    }
+{
+    if (componentName.equals("ZmianaDanych"))
+        return new ZmianaDanych();
+    else if (componentName.equals("Konto"))
+        return new Konto();
+    else if (componentName.equals("Trasy"))
+        return new Trasy();
+    else if (componentName.equals("Rezerwacja"))
+        return new Rezerwacja();
+    else
+        return new Index();
+}
 
     private void addMenuOptionPA(String caption, String componentName)
     {
@@ -161,7 +161,7 @@ public class PanelAdministratora extends VerticalLayout implements View
         this.navigateHomePA("Home");
 
         this.addMenuOptionPA("Zarządzaj rezerwacją", "Rezerwacja");
-        this.addMenuOptionPA("Zarządzaj kontami", "Konta");
+        this.addMenuOptionPA("Zarządzaj kontami", "Konto");
         this.addMenuOptionPA("Zarządzaj trasami", "Trasy");
         this.addMenuOptionPA("Zmiana danych", "ZmianaDanych");
 

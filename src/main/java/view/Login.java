@@ -35,17 +35,16 @@ public class Login extends VerticalLayout implements View
         HorizontalLayout horizontalLayout = new HorizontalLayout();
 
         horizontalLayout.addComponent(buttonLogin);
-        horizontalLayout.addComponent(buttonSingUp);
+        horizontalLayout.addComponent(buttonSingUp);;
 
         horizontalLayout.setSpacing(true);
 
         //formLayout
         FormLayout formLayout = new FormLayout(textLogin, pass, horizontalLayout);
         formLayout.setMargin(true);
-
         //Panel
         Panel loginPanel = new Panel("Panel logowania", formLayout);
-        loginPanel.setWidth("450");
+        loginPanel.setWidth("350");
         loginPanel.setHeight("250");
 
         //components

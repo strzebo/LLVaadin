@@ -124,8 +124,8 @@ public class PanelKierownika extends VerticalLayout implements View
     {
         if (componentName.equals("ZmianaDanych"))
             return new ZmianaDanych();
-        else if (componentName.equals("Konta"))
-            return new Konta();
+        else if (componentName.equals("Konto"))
+            return new Konto();
         else if (componentName.equals("Trasy"))
             return new Trasy();
         else
@@ -159,7 +159,7 @@ public class PanelKierownika extends VerticalLayout implements View
         this.navigateHomePK("Home");
 
         this.addMenuOptionPK("Zarządzaj trasami", "Trasy");
-        this.addMenuOptionPK("Zarządzaj kontami", "Konta");
+        this.addMenuOptionPK("Zarządzaj kontami", "Konto");
         this.addMenuOptionPK("Zmiana danych", "ZmianaDanych");
 
         this.addWelcomeTextPK("Panel kierownika");

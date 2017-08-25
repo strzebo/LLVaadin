@@ -12501,3 +12501,16 @@ div.v-layout.v-horizontal.v-widget {
 	width: 19px;
 	overflow: hidden;
 }
+
+.mytheme .v-slot.v-slot-h1.v-slot-colored {
+	height: 10% !important;
+}
+
+.mytheme .v-grid-tablewrapper {
+	height: 65% !important;
+}
+
+.mytheme .colored {
+	color: darkslateblue !important;
+	font-weight: bold;
+}

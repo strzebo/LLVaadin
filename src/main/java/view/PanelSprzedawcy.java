@@ -124,8 +124,8 @@ public class PanelSprzedawcy extends VerticalLayout implements View
     {
         if (componentName.equals("ZmianaDanych"))
             return new ZmianaDanych();
-        else if (componentName.equals("Konta"))
-            return new Konta();
+        else if (componentName.equals("Konto"))
+            return new Konto();
         else if (componentName.equals("Rezerwacja"))
             return new Rezerwacja();
         else
@@ -159,7 +159,7 @@ public class PanelSprzedawcy extends VerticalLayout implements View
         this.navigateHomePS("Home");
 
         this.addMenuOptionPS("Zarządzaj rezerwacją", "Rezerwacja");
-        this.addMenuOptionPS("Zarządzaj kontami", "Konta");
+        this.addMenuOptionPS("Zarządzaj kontami", "Konto");
         this.addMenuOptionPS("Zmiana danych", "ZmianaDanych");
 
         this.addWelcomeTextPS("Panel sprzedawcy");

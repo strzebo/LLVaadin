@@ -8,4 +8,16 @@
   @include addons;
   @include mytheme;
 
+  .v-slot.v-slot-h1.v-slot-colored{
+    height: 10%!important;
+  }
+
+  .v-grid-tablewrapper{
+    height: 65%!important; ;
+  }
+
+  .colored{
+    color: darkslateblue!important;
+    font-weight: bold;
+  }
 }

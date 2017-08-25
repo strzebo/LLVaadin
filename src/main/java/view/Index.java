@@ -72,16 +72,19 @@ public class Index extends VerticalLayout implements View
         menuLayout.setWidth("100%");
         menuLayout.setComponentAlignment(menuTitle, Alignment.MIDDLE_CENTER);
 
+
         HorizontalSplitPanel lowerSection = new HorizontalSplitPanel();
         lowerSection.addComponent(menuLayout);
         lowerSection.addComponent(contentLayout);
+
+
         contentLayout.setSizeFull();
         lowerSection.setSizeFull();
         lowerSection.setSplitPosition(17);
 
         addComponent(upperSection);
         addComponent(lowerSection);
-
+        setComponentAlignment(lowerSection, Alignment.MIDDLE_CENTER);
         setSizeFull();
 
         setExpandRatio(lowerSection,1);
@@ -211,6 +214,7 @@ public class Index extends VerticalLayout implements View
 
         this.navigatePanelUzytkownika();
         this.navigatePanelSprzedawcy();
+
         this.navigatePanelKierownika();
         this.navigatePanelAdministratora();
 

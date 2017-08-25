@@ -7,7 +7,6 @@ import com.vaadin.ui.*;
 import logic.Main;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
 
 public class Rejestracja extends VerticalLayout implements View
 {
@@ -35,11 +34,11 @@ public class Rejestracja extends VerticalLayout implements View
 
         formLayout.setMargin(false);
         formLayout.setWidth("35%");
-        formLayout.addStyleName("light");
+        //formLayout.addStyleName("light");
 
         Label labelHeader = new Label("Dane personalne");
         labelHeader.addStyleName("h2");
-        labelHeader.addStyleName("colored");;
+        labelHeader.addStyleName("colored");
 
         textName = new TextField("Imię");
         textName.setRequiredIndicatorVisible(true);
@@ -60,7 +59,8 @@ public class Rejestracja extends VerticalLayout implements View
         textPhoneNumber = new TextField("Numer telefonu");
         textPhoneNumber.setRequiredIndicatorVisible(true);
 
-        textIDNumber = new TextField("Numer dokumentu (dowód osobisty lub paszport");
+        textIDNumber = new TextField("Numer dokumentu (dowód osobisty lub paszport)");
+        textIDNumber.setStyleName("multiline");
         textIDNumber.setRequiredIndicatorVisible(true);
 
         HorizontalLayout footer = new HorizontalLayout();
