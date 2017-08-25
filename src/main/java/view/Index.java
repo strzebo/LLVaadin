@@ -13,6 +13,7 @@ public class Index extends VerticalLayout implements View
     private VerticalLayout menuLayout = new VerticalLayout();
     private HorizontalLayout menuTitle = new HorizontalLayout();
     private VerticalLayout contentLayout = new VerticalLayout();
+
     private Label labelMenu;
 
     public Index()
@@ -76,7 +77,7 @@ public class Index extends VerticalLayout implements View
         lowerSection.addComponent(contentLayout);
         contentLayout.setSizeFull();
         lowerSection.setSizeFull();
-        lowerSection.setSplitPosition(15);
+        lowerSection.setSplitPosition(17);
 
         addComponent(upperSection);
         addComponent(lowerSection);
@@ -97,14 +98,17 @@ public class Index extends VerticalLayout implements View
 
     private void addWelcomeText(String value)
     {
-        Label labelTitle = new Label("Welcome !"); //+ mainLogic.getCurrentUser().getName() +
+        Label labelTitle = new Label(); //+ mainLogic.getCurrentUser().getName() +
         labelTitle.addStyleName("h1");
         labelTitle.addStyleName("colored");
 
         labelTitle.setValue(value);// + mainLogic.getCurrentUser().getType());
 
+
+
         contentLayout.addComponent(labelTitle);
         contentLayout.setMargin(new MarginInfo(false, false, false, true));
+
     }
 
     private void addDashboardOption(String caption)

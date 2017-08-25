@@ -10,39 +10,32 @@ public class PanelUzytkownika extends VerticalLayout implements View
 {
     Main mainLogic = new Main();
 
-    HorizontalLayout upperSection = new HorizontalLayout();
-    HorizontalLayout innerUpperSection = new HorizontalLayout();
-    HorizontalSplitPanel lowerSection = new HorizontalSplitPanel();
-    VerticalLayout menuLayout = new VerticalLayout();
-    HorizontalLayout menuTitle = new HorizontalLayout();
-    VerticalLayout contentLayout = new VerticalLayout();
+    private VerticalLayout menuLayout = new VerticalLayout();
+    private HorizontalLayout menuTitle = new HorizontalLayout();
+    private VerticalLayout contentLayout = new VerticalLayout();
 
-    Label labelHeader;
-    Label labelMenu;
-    Button buttonLogout;
-    Button buttonLogin;
-    Button buttonSingUp;
+    private Label labelMenu;
 
     public PanelUzytkownika()
     {
-        labelHeader = new Label("");
+        Label labelHeader = new Label("");
         labelHeader.addStyleName("colored");
         labelHeader.addStyleName("h2");
         labelHeader.setSizeUndefined();
 
-        buttonLogin = new Button("Zaloguj się");
+        Button buttonLogin = new Button("Zaloguj się");
         buttonLogin.addStyleName("small");
         buttonLogin.addStyleName("friendly");
         buttonLogin.setSizeUndefined();
         buttonLogin.addClickListener((Button.ClickListener) event -> getUI().getNavigator().navigateTo("login"));
 
-        buttonSingUp = new Button("Zarejestruj się");
+        Button buttonSingUp = new Button("Zarejestruj się");
         buttonSingUp.addStyleName("small");
         buttonSingUp.addStyleName("friendly");
         buttonSingUp.setSizeUndefined();
         buttonSingUp.addClickListener((Button.ClickListener) event -> getUI().getNavigator().navigateTo("rejestracja"));
 
-        buttonLogout = new Button("Wyloguj się");
+        Button buttonLogout = new Button("Wyloguj się");
         buttonLogout.addStyleName("small");
         buttonLogout.addStyleName("danger");
         buttonLogout.setSizeUndefined();
@@ -52,7 +45,8 @@ public class PanelUzytkownika extends VerticalLayout implements View
         labelMenu.addStyleName("colored");
         labelMenu.addStyleName("h2");
 
-        //Sections
+
+        HorizontalLayout innerUpperSection = new HorizontalLayout();
         innerUpperSection.addComponent(labelHeader);
         innerUpperSection.addComponent(buttonLogin);
         innerUpperSection.addComponent(buttonSingUp);
@@ -65,6 +59,7 @@ public class PanelUzytkownika extends VerticalLayout implements View
         innerUpperSection.setComponentAlignment(buttonSingUp, Alignment.MIDDLE_RIGHT);
         innerUpperSection.setComponentAlignment(buttonLogout, Alignment.MIDDLE_RIGHT);
 
+        HorizontalLayout upperSection = new HorizontalLayout();
         upperSection.setSizeFull();
         upperSection.addComponent(innerUpperSection);
 
@@ -79,11 +74,12 @@ public class PanelUzytkownika extends VerticalLayout implements View
         menuLayout.setWidth("100%");
         menuLayout.setComponentAlignment(menuTitle, Alignment.MIDDLE_CENTER);
 
+        HorizontalSplitPanel lowerSection = new HorizontalSplitPanel();
         lowerSection.addComponent(menuLayout);
         lowerSection.addComponent(contentLayout);
         contentLayout.setSizeFull();
         lowerSection.setSizeFull();
-        lowerSection.setSplitPosition(15);
+        lowerSection.setSplitPosition(17);
 
         addComponent(upperSection);
         addComponent(lowerSection);

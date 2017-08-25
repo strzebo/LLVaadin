@@ -32,7 +32,7 @@ public class MyUI extends UI
         navigator.addView("historiaperacji", new HistoriaOperacji());
         navigator.addView("konta", new Konta());
 
-        navigator.navigateTo("login");
+        navigator.navigateTo("index");
     }
 
     @WebServlet(urlPatterns = "/*", name = "MyUIServlet", asyncSupported = true)
