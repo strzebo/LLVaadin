@@ -31,7 +31,7 @@ public class Trasy extends VerticalLayout implements View
         addComponent(formLayout);
         setComponentAlignment(formLayout, Alignment.TOP_CENTER);
 
-        labelGridTitle = new Label("Wyniki wyszukiwania");
+        labelGridTitle = new Label("Wyszukiwarka");
         labelGridTitle.addStyleName("h2");
         labelGridTitle.addStyleName("colored");
 
@@ -45,7 +45,7 @@ public class Trasy extends VerticalLayout implements View
 
         gridTrasy = new Grid<>();
         gridTrasy.getEditor().setEnabled(true);
-        gridTrasy.setWidth("700");
+        gridTrasy.setWidth("1050");
         gridTrasy.setHeight("500");
 
         /* jak będzie jakiś pracownik to warunek:
@@ -82,7 +82,7 @@ public class Trasy extends VerticalLayout implements View
         formLayout.addComponent(buttonSzukaj);
         formLayout.addComponent(footer);
 
-        gridTrasy.addColumn (Loty::getID).setCaption("ID");
+        gridTrasy.addColumn (Loty::getID).setCaption("Nr");
         //gridTrasy.getColumn("ID").setEditable(false);
         gridTrasy.addColumn(Loty::getLotniskoStartowe).setCaption("Lotnisko startowe");
         //gridTrasy.getColumn("Lotnisko startowe").setEditable(false);

@@ -58,11 +58,11 @@ public class Main
         db.Insert("uzytkownik",columns,value);
     }
 
-    public boolean logIn(String login, String password) throws SQLException
+    public boolean logIn(String email, String password) throws SQLException
     {
         DbConnection db = new DbConnection();
 
-        db.Select("","uzytkownik","Login = '" + login + "' AND Haslo = '" + password +"'");
+        db.Select("","uzytkownik","Login = '" + email + "' AND Haslo = '" + password +"'");
 
         return false;
 

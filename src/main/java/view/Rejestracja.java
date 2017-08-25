@@ -16,11 +16,10 @@ public class Rejestracja extends VerticalLayout implements View
     private TextField textName;
     private TextField textLastName;
     private TextField textEmail;
-    private TextField textLogin;
     private PasswordField pass;
-
-    private ComboBox comboType;
-
+    private TextField textAddress;
+    private TextField textPhoneNumber;
+    private TextField textIDNumber;
 
     public Rejestracja()
     {
@@ -31,20 +30,14 @@ public class Rejestracja extends VerticalLayout implements View
         //UI components
         FormLayout formLayout = new FormLayout();
 
-        ArrayList<String> typ = new ArrayList<>();
-        typ.add("Użytkownik");
-        typ.add("Sprzedawca");
-        typ.add("Kierownik");
-        typ.add("Administrator");
-
-        Label labelTitle = new Label("Rejestracja");
+        Label labelTitle = new Label("Rejestracja użytkownika");
         labelTitle.addStyleName("h1");
 
         formLayout.setMargin(false);
         formLayout.setWidth("35%");
         formLayout.addStyleName("light");
 
-        Label labelHeader = new Label("Dane Personalne");
+        Label labelHeader = new Label("Dane personalne");
         labelHeader.addStyleName("h2");
         labelHeader.addStyleName("colored");;
 
@@ -54,18 +47,21 @@ public class Rejestracja extends VerticalLayout implements View
         textLastName = new TextField("Nazwisko");
         textLastName.setRequiredIndicatorVisible(true);
 
+        // adres e-mail to login w bazie danych
         textEmail = new TextField("Adres E-mail");
         textEmail.setRequiredIndicatorVisible(true);
-
-        textLogin = new TextField("Login");
-        textLogin.setRequiredIndicatorVisible(true);
 
         pass = new PasswordField("Hasło");
         pass.setRequiredIndicatorVisible(true);
 
-        comboType  = new ComboBox("Typ konta", typ);
-        comboType.setRequiredIndicatorVisible(true);
+        textAddress = new TextField("Adres korespondecyjny");
+        textAddress.setRequiredIndicatorVisible(true);
 
+        textPhoneNumber = new TextField("Numer telefonu");
+        textPhoneNumber.setRequiredIndicatorVisible(true);
+
+        textIDNumber = new TextField("Numer dokumentu (dowód osobisty lub paszport");
+        textIDNumber.setRequiredIndicatorVisible(true);
 
         HorizontalLayout footer = new HorizontalLayout();
 
@@ -81,9 +77,10 @@ public class Rejestracja extends VerticalLayout implements View
         formLayout.addComponent(textName);
         formLayout.addComponent(textLastName);
         formLayout.addComponent(textEmail);
-        formLayout.addComponent(textLogin);
         formLayout.addComponent(pass);
-        formLayout.addComponent(comboType);
+        formLayout.addComponent(textAddress);
+        formLayout.addComponent(textPhoneNumber);
+        formLayout.addComponent(textIDNumber);
         formLayout.addComponent(footer);
 
         Button buttonConfirm = new Button("Potwierdź");
@@ -93,7 +90,7 @@ public class Rejestracja extends VerticalLayout implements View
         {
             try
             {
-                mainLogic.singUp(textName.getValue(), textLastName.getValue(), textEmail.getValue(), textLogin.getValue(), pass.getValue(), comboType.getCaption());
+                mainLogic.singUp(textName.getValue(), textLastName.getValue(), textEmail.getValue(), pass.getValue(), textAddress.getValue(), textPhoneNumber.getValue(), textIDNumber.getValue());
             } catch (SQLException e)
             {
                 e.printStackTrace();
