@@ -1,5 +1,6 @@
 package view;
 
+import com.vaadin.annotations.StyleSheet;
 import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.VaadinServletConfiguration;
 import com.vaadin.navigator.Navigator;
@@ -8,6 +9,8 @@ import com.vaadin.server.VaadinServlet;
 import com.vaadin.ui.UI;
 
 import javax.servlet.annotation.WebServlet;
+
+@StyleSheet({"http://fonts.googleapis.com/css?family=Lato"})
 
 @Theme("mytheme")
 public class MyUI extends UI
