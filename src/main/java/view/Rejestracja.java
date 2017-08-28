@@ -70,6 +70,7 @@ public class Rejestracja extends VerticalLayout implements View
         footer.setDefaultComponentAlignment(Alignment.MIDDLE_CENTER);
 
         addComponent(labelTitle);
+        setComponentAlignment(labelTitle,Alignment.TOP_CENTER);
         addComponent(formLayout);
         setComponentAlignment(formLayout, Alignment.MIDDLE_CENTER);
 
