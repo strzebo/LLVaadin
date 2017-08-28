@@ -2,30 +2,52 @@ package view;
 
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener;
+import com.vaadin.server.Page;
 import com.vaadin.ui.*;
 import logic.Main;
+
+import java.sql.SQLException;
 
 public class Login extends VerticalLayout implements View
 {
     Main main = new Main();
     private TextField textLogin;
     private PasswordField pass;
-    private Button buttonSingUp;
-    private Button buttonLogin;
 
     public Login()
     {
+
         //elements
-        textLogin = new TextField("Login");
+        textLogin = new TextField("Email");
         pass = new PasswordField("Hasło");
 
 
         //UI - buttons
-        buttonLogin = new Button("Login");
+        Button buttonLogin = new Button("Login");
         buttonLogin.addStyleName("friendly");
-        buttonLogin.addClickListener(clickEvent -> getUI().getNavigator().navigateTo("index"));
+        buttonLogin.addClickListener(clickEvent ->
+        {
+            boolean zalogowany = false;
 
-        buttonSingUp = new Button("Rejestracja");
+            try
+            {
+                zalogowany = main.logIn(textLogin.getValue(),pass.getValue());
+            } catch (SQLException e)
+            {
+                e.printStackTrace();
+            }
+
+            if(zalogowany)
+            {
+                Notification.show("Poprawnie zalogowano");
+                Page.getCurrent().reload();
+            }
+            else
+                Notification.show("Podano błędny login lub hasło!");
+
+        });
+
+        Button buttonSingUp = new Button("Rejestracja");
         buttonSingUp.addStyleName("primary");
         buttonSingUp.addClickListener(clickEvent -> getUI().getNavigator().navigateTo("rejestracja"));
 
@@ -51,6 +73,7 @@ public class Login extends VerticalLayout implements View
         addComponent(loginPanel);
         setComponentAlignment(loginPanel,Alignment.MIDDLE_CENTER);
         setHeight("100%");
+
 
 
 

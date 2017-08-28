@@ -1,71 +1,65 @@
 package logic;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 
 public class Main
 {
-    //static
-    private static ArrayList<User> userList = new ArrayList<>();
-    private static User currentUser;
+    private static int userID = 0;
+    private static int userType = 0;
 
-    //get
-    public ArrayList<User> getUserList() {   return userList;    }
+    public static int getUserID() { return userID;  }
+    public static int getUserType()  {   return userType;    }
 
-    public User getCurrentUser() {  return currentUser;    }
-
-    public ArrayList<Sprzedawca> getSprzedawcakList()
-    {
-        ArrayList<Sprzedawca> sprzedawcaList = new ArrayList<>();
-
-        for(User sprzedawca : userList)
-        {
-            if (sprzedawca instanceof Sprzedawca)
-                sprzedawcaList.add((Sprzedawca) sprzedawca);
-        }
-
-        return sprzedawcaList;
-    }
-
-    public ArrayList<Uzytkownik> getUzytkownikList()
-    {
-        ArrayList<Uzytkownik> uzytkownikList = new ArrayList<>();
-
-        for(User uzytkownik : userList)
-        {
-            if (uzytkownik instanceof Uzytkownik)
-                uzytkownikList.add((Uzytkownik) uzytkownik);
-        }
-
-        return uzytkownikList;
-    }
+    public static void setUserID(int userID)    {   Main.userID = userID;   }
+    public static void setUserType(int userType) {   Main.userType = userType;   }
 
 
-    //rejestracja -> dodać zapytanie SQL
     public void singUp(String name, String lastName, String email, String password, String address, String phoneNumber, String idNumber) throws SQLException
     {
         DbConnection db = new DbConnection();
-        //String boolowska = "";
 
-        String columns = "Imie, Nazwisko, Email, Haslo, Adres, Telefon, NrDokumentu";
+        String columns = "Imie, Nazwisko, Email, Haslo, Adres, Telefon, NrDokumentu, TypKonta";
         String value;
+        int typKonta = 0;
+
+        if (idNumber.startsWith("2S"))
+            typKonta = 2;
+        else if (idNumber.startsWith("3K"))
+            typKonta = 3;
+        else if (idNumber.startsWith("4A"))
+            typKonta = 4;
+        else
+            typKonta = 1;
+
+
 
         Uzytkownik uzytkownik = new Uzytkownik(name, lastName, email, password, address, phoneNumber, idNumber);
-        userList.add(uzytkownik);
 
-        value = "'" + name + "', '" + lastName + "', '" + email + "', '" + password + "', '" + address + "', '" + phoneNumber + "','" + idNumber + "'";
-
+        value = "'" + name + "', '" + lastName + "', '" + email + "', '" + password + "', '" + address + "', '" + phoneNumber + "','" + idNumber + "','" + typKonta + "'";
         db.Insert("uzytkownik",columns,value);
     }
 
     public boolean logIn(String email, String password) throws SQLException
     {
         DbConnection db = new DbConnection();
+        boolean zalogowany = false;
 
-        db.Select("","uzytkownik","Login = '" + email + "' AND Haslo = '" + password +"'");
+        ResultSet rs = db.Result("ID, TypKonta","uzytkownik","Email = '" + email + "' AND Haslo = '" + password +"'");
 
-        return false;
+        while(rs.next())
+        {
+            if(rs.getInt("ID") > 0)
+            {
+                setUserID(rs.getInt("ID"));
+                setUserType(rs.getInt("TypKonta"));
 
+                zalogowany = true;
+            }
+        }
+        db.Close();
+
+        return zalogowany;
     }
 
 }

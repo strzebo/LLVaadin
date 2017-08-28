@@ -23,6 +23,7 @@ public class DbConnection
         }
     }
 
+    /*
     public void Select(String select, String from, String where) throws SQLException
     {
         Initialize();
@@ -34,16 +35,26 @@ public class DbConnection
             where = "1";
 
         cm = "SELECT " + select + " FROM " + from + " WHERE " + where;
-        //statement.execute(cm);
-        ResultSet rs = statement.executeQuery(cm);
+        statement.execute(cm);
+        //ResultSet rs = statement.executeQuery(cm);
 
-        while(rs.next())
-        {
-            String user = rs.getString("ID");
-            System.out.println("ID usera : " + user + "\n");
-        }
+        this.Close();
+    }
+    */
 
-        connection.close();
+    public ResultSet Result(String select, String from, String where) throws SQLException
+    {
+        Initialize();
+
+        if(select.isEmpty())
+            select = "*";
+
+        if(where.isEmpty())
+            where = "1";
+
+        cm = "SELECT " + select + " FROM " + from + " WHERE " + where;
+
+        return statement.executeQuery(cm);
     }
 
     public void Insert(String into, String column, String value)
@@ -55,7 +66,7 @@ public class DbConnection
             statement.executeUpdate(cm);
 
             statement.close();
-            connection.close();
+            this.Close();
         }
         catch(SQLException ex)
         {
@@ -72,7 +83,7 @@ public class DbConnection
 
             statement.executeUpdate(cm);
 
-            connection.close();
+            this.Close();
         }
         catch(SQLException ex)
         {
@@ -95,4 +106,8 @@ public class DbConnection
         }
     }
 
+    public void Close() throws SQLException
+    {
+        connection.close();
+    }
 }

@@ -2,6 +2,7 @@ package view;
 
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener;
+import com.vaadin.server.Page;
 import com.vaadin.shared.ui.MarginInfo;
 import com.vaadin.ui.*;
 import logic.Main;
@@ -100,6 +101,7 @@ public class Rejestracja extends VerticalLayout implements View
 
             Notification.show("Rejestracja przebiegła pomyślnie!");
 
+            Page.getCurrent().reload() ;
             getUI().getNavigator().navigateTo("login");
         });
 

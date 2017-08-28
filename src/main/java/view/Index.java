@@ -2,13 +2,14 @@ package view;
 
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener;
+import com.vaadin.server.Page;
 import com.vaadin.shared.ui.MarginInfo;
 import com.vaadin.ui.*;
 import logic.Main;
 
 public class Index extends VerticalLayout implements View
 {
-    Main mainLogic = new Main();
+    Main main = new Main();
 
     private VerticalLayout menuLayout = new VerticalLayout();
     private HorizontalLayout menuTitle = new HorizontalLayout();
@@ -39,7 +40,12 @@ public class Index extends VerticalLayout implements View
         buttonLogout.addStyleName("small");
         buttonLogout.addStyleName("danger");
         buttonLogout.setSizeUndefined();
-        buttonLogout.addClickListener((Button.ClickListener) event -> getUI().getNavigator().navigateTo("index"));
+        buttonLogout.addClickListener((Button.ClickListener) event ->
+        {
+            main.setUserID(0);
+            main.setUserType(0);
+            Page.getCurrent().reload();
+        });
 
         labelMenu = new Label("Menu");
         labelMenu.addStyleName("colored");
@@ -47,17 +53,26 @@ public class Index extends VerticalLayout implements View
 
         HorizontalLayout innerUpperSection = new HorizontalLayout();
         innerUpperSection.addComponent(labelHeader);
-        innerUpperSection.addComponent(buttonLogin);
-        innerUpperSection.addComponent(buttonSingUp);
-        innerUpperSection.addComponent(buttonLogout);
-        innerUpperSection.setExpandRatio(buttonLogin, 1);
-        innerUpperSection.setExpandRatio(buttonSingUp, 1);
-        innerUpperSection.setExpandRatio(buttonLogout, 1);
-        innerUpperSection.setSpacing(true);
-        innerUpperSection.setComponentAlignment(buttonLogin, Alignment.MIDDLE_RIGHT);
-        innerUpperSection.setComponentAlignment(buttonSingUp, Alignment.MIDDLE_RIGHT);
-        innerUpperSection.setComponentAlignment(buttonLogout, Alignment.MIDDLE_RIGHT);
 
+        if(main.getUserID() == 0 )
+        {
+            innerUpperSection.addComponent(buttonLogin);
+            innerUpperSection.setExpandRatio(buttonLogin, 1);
+            innerUpperSection.setComponentAlignment(buttonLogin, Alignment.MIDDLE_RIGHT);
+
+            innerUpperSection.addComponent(buttonSingUp);
+            innerUpperSection.setExpandRatio(buttonSingUp, 1);
+            innerUpperSection.setComponentAlignment(buttonSingUp, Alignment.MIDDLE_RIGHT);
+        }
+
+        if(main.getUserID() != 0)
+        {
+            innerUpperSection.addComponent(buttonLogout);
+            innerUpperSection.setExpandRatio(buttonLogout, 1);
+            innerUpperSection.setComponentAlignment(buttonLogout, Alignment.MIDDLE_RIGHT);
+        }
+
+        innerUpperSection.setSpacing(true);
         HorizontalLayout upperSection = new HorizontalLayout();
         upperSection.setSizeFull();
         upperSection.addComponent(innerUpperSection);
@@ -106,8 +121,6 @@ public class Index extends VerticalLayout implements View
         labelTitle.addStyleName("colored");
 
         labelTitle.setValue(value);// + mainLogic.getCurrentUser().getType());
-
-
 
         contentLayout.addComponent(labelTitle);
         contentLayout.setMargin(new MarginInfo(false, false, false, true));
@@ -212,11 +225,14 @@ public class Index extends VerticalLayout implements View
 
         this.addMenuOption("Wyszukaj loty", "Trasy");
 
-        this.navigatePanelUzytkownika();
-        this.navigatePanelSprzedawcy();
-
-        this.navigatePanelKierownika();
-        this.navigatePanelAdministratora();
+        if(main.getUserType() == 1)
+            this.navigatePanelUzytkownika();
+        else if (main.getUserType() == 2)
+            this.navigatePanelSprzedawcy();
+        else if (main.getUserType() == 3)
+            this.navigatePanelKierownika();
+        else if (main.getUserType() == 4)
+            this.navigatePanelAdministratora();
 
         this.addMenuOption("Kontakt", "Kontakt");
 
