@@ -39,8 +39,8 @@ public class Login extends VerticalLayout implements View
 
             if(zalogowany)
             {
-                Notification.show("Poprawnie zalogowano");
                 Page.getCurrent().reload();
+                Notification.show("Poprawnie zalogowano");
             }
             else
                 Notification.show("Podano błędny login lub hasło!");
@@ -51,13 +51,18 @@ public class Login extends VerticalLayout implements View
         buttonSingUp.addStyleName("primary");
         buttonSingUp.addClickListener(clickEvent -> getUI().getNavigator().navigateTo("rejestracja"));
 
+        Button buttonBack = new Button("Wróć");
+        buttonBack.addStyleName("danger");
+        buttonBack.addClickListener((Button.ClickListener) clickEvent -> getUI().getNavigator().navigateTo("index"));
 
+        addComponent(buttonBack);
+        setComponentAlignment(buttonBack,Alignment.TOP_RIGHT);
 
         //layout
         HorizontalLayout horizontalLayout = new HorizontalLayout();
 
         horizontalLayout.addComponent(buttonLogin);
-        horizontalLayout.addComponent(buttonSingUp);;
+        horizontalLayout.addComponent(buttonSingUp);
 
         horizontalLayout.setSpacing(true);
 
@@ -66,7 +71,7 @@ public class Login extends VerticalLayout implements View
         formLayout.setMargin(true);
         //Panel
         Panel loginPanel = new Panel("Panel logowania", formLayout);
-        loginPanel.setWidth("350");
+        loginPanel.setWidth("450");
         loginPanel.setHeight("250");
 
         //components

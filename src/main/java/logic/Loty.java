@@ -1,7 +1,6 @@
 package logic;
 
 import java.sql.Time;
-import java.util.Currency;
 import java.util.Date;
 
 public class Loty
@@ -13,9 +12,8 @@ public class Loty
     private Date dataPrzylotu;
     private Time godzinaOdlotu;
     private Time godzinaPrzylotu;
-    private Currency cenaBiletu;
 
-    public Loty(int ID, String lotniskoStartowe, String lotniskoDocelowe, Date dataOdlotu, Date dataPrzylotu, Time godzinaOdlotu, Time godzinaPrzylotu, Currency cenaBiletu)
+    public Loty(int ID, String lotniskoStartowe, String lotniskoDocelowe, Date dataOdlotu, Date dataPrzylotu, Time godzinaOdlotu, Time godzinaPrzylotu)
     {
         this.ID = ID;
         this.lotniskoStartowe = lotniskoStartowe;
@@ -24,8 +22,8 @@ public class Loty
         this.dataPrzylotu = dataPrzylotu;
         this.godzinaOdlotu = godzinaOdlotu;
         this.godzinaPrzylotu = godzinaPrzylotu;
-        this.cenaBiletu = cenaBiletu;
     }
+
 
     public int getID() {    return ID;  }
 
@@ -40,9 +38,4 @@ public class Loty
     public Time getGodzinaOdlotu()  {   return godzinaOdlotu;   }
 
     public Time getGodzinaPrzylotu()    {   return godzinaPrzylotu; }
-
-    public Currency getCenaBiletu() {   return cenaBiletu;  }
-
-
-
 }

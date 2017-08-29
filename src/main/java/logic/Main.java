@@ -2,6 +2,8 @@ package logic;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Main
 {
@@ -60,6 +62,34 @@ public class Main
         db.Close();
 
         return zalogowany;
+    }
+
+    public List<Loty> getLotyList() throws SQLException
+    {
+        DbConnection db = new DbConnection();
+        List<Loty> lotyList = new ArrayList<>();
+
+        ResultSet resultSet = db.Result("","lot","");
+
+        while(resultSet.next())
+        {
+            lotyList.add
+                    (
+                            new Loty
+                                    (
+                                            resultSet.getInt("lot.ID"),
+                                            resultSet.getString("LotniskoStartowe"),
+                                            resultSet.getString("LotniskoDocelowe"),
+                                            resultSet.getDate("DataOdlotu"),
+                                            resultSet.getDate("DataPrzylotu"),
+                                            resultSet.getTime("Odlot"),
+                                            resultSet.getTime("Przylot")
+                                    )
+                    );
+        }
+        db.Close();
+
+        return  lotyList;
     }
 
 }

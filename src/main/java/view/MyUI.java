@@ -9,6 +9,7 @@ import com.vaadin.server.VaadinServlet;
 import com.vaadin.ui.UI;
 
 import javax.servlet.annotation.WebServlet;
+import java.sql.SQLException;
 
 @StyleSheet({"http://fonts.googleapis.com/css?family=Lato"})
 
@@ -31,11 +32,18 @@ public class MyUI extends UI
         navigator.addView("zmianadanych", new ZmianaDanych());
         navigator.addView("rejestracja", new Rejestracja());
         navigator.addView("rezerwacja", new Rezerwacja());
-        navigator.addView("trasy", new Trasy());
+        try
+        {
+            navigator.addView("trasy", new Trasy());
+        } catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
         navigator.addView("historiaperacji", new HistoriaOperacji());
         navigator.addView("konto", new Konto());
 
-        navigator.navigateTo("index");
+        if(navigator.getState().isEmpty() || navigator.getState().equals("login") || navigator.getState().equals("rejestracja"))
+            navigator.navigateTo("index");
     }
 
     @WebServlet(urlPatterns = "/*", name = "MyUIServlet", asyncSupported = true)

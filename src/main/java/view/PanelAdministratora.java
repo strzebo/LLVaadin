@@ -7,6 +7,8 @@ import com.vaadin.shared.ui.MarginInfo;
 import com.vaadin.ui.*;
 import logic.Main;
 
+import java.sql.SQLException;
+
 public class PanelAdministratora extends VerticalLayout implements View
 {
     Main main = new Main();
@@ -136,8 +138,8 @@ public class PanelAdministratora extends VerticalLayout implements View
         button.addClickListener(event -> getUI().getNavigator().navigateTo("index"));
     }
 
-    private Component getComponentPA(String componentName)
-{
+    private Component getComponentPA(String componentName) throws SQLException
+    {
     if (componentName.equals("ZmianaDanych"))
         return new ZmianaDanych();
     else if (componentName.equals("Konto"))
@@ -162,7 +164,13 @@ public class PanelAdministratora extends VerticalLayout implements View
         {
             contentLayout.removeAllComponents();
             addWelcomeTextPA(caption);
-            contentLayout.addComponent(getComponentPA(componentName));
+            try
+            {
+                contentLayout.addComponent(getComponentPA(componentName));
+            } catch (SQLException e)
+            {
+                e.printStackTrace();
+            }
         });
     }
 

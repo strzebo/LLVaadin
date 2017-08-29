@@ -7,6 +7,8 @@ import com.vaadin.shared.ui.MarginInfo;
 import com.vaadin.ui.*;
 import logic.Main;
 
+import java.sql.SQLException;
+
 public class Index extends VerticalLayout implements View
 {
     Main main = new Main();
@@ -24,17 +26,19 @@ public class Index extends VerticalLayout implements View
         labelHeader.addStyleName("h2");
         labelHeader.setSizeUndefined();
 
-        Button buttonLogin = new Button("Zaloguj się");
+        Button buttonLogin = new Button("Zaloguj się / Zarejestruj się");
         buttonLogin.addStyleName("small");
         buttonLogin.addStyleName("friendly");
         buttonLogin.setSizeUndefined();
         buttonLogin.addClickListener((Button.ClickListener) event -> getUI().getNavigator().navigateTo("login"));
 
+        /*
         Button buttonSingUp = new Button("Zarejestruj się");
         buttonSingUp.addStyleName("small");
         buttonSingUp.addStyleName("friendly");
         buttonSingUp.setSizeUndefined();
         buttonSingUp.addClickListener((Button.ClickListener) event -> getUI().getNavigator().navigateTo("rejestracja"));
+        */
 
         Button buttonLogout = new Button("Wyloguj się");
         buttonLogout.addStyleName("small");
@@ -59,10 +63,6 @@ public class Index extends VerticalLayout implements View
             innerUpperSection.addComponent(buttonLogin);
             innerUpperSection.setExpandRatio(buttonLogin, 1);
             innerUpperSection.setComponentAlignment(buttonLogin, Alignment.MIDDLE_RIGHT);
-
-            innerUpperSection.addComponent(buttonSingUp);
-            innerUpperSection.setExpandRatio(buttonSingUp, 1);
-            innerUpperSection.setComponentAlignment(buttonSingUp, Alignment.MIDDLE_RIGHT);
         }
 
         if(main.getUserID() != 0)
@@ -184,7 +184,7 @@ public class Index extends VerticalLayout implements View
     }
     //endregion
 
-    private Component getComponent(String componentName)
+    private Component getComponent(String componentName) throws SQLException
     {
         if (componentName.equals("Kontakt"))
             return new Kontakt();
@@ -206,7 +206,13 @@ public class Index extends VerticalLayout implements View
         {
             contentLayout.removeAllComponents();
             addWelcomeText(caption);
-            contentLayout.addComponent(getComponent(componentName));
+            try
+            {
+                contentLayout.addComponent(getComponent(componentName));
+            } catch (SQLException e)
+            {
+                e.printStackTrace();
+            }
         });
     }
 

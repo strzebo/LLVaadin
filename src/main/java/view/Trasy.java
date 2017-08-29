@@ -4,18 +4,19 @@ import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener;
 import com.vaadin.shared.ui.MarginInfo;
 import com.vaadin.ui.*;
+import com.vaadin.ui.renderers.ButtonRenderer;
 import logic.Loty;
+import logic.Main;
+
+import java.sql.SQLException;
 
 public class Trasy extends VerticalLayout implements View
 {
-    public Trasy()
+    public Trasy() throws SQLException
     {
+        Main main = new Main();
         Grid<Loty> gridTrasy;
-        Label labelGridTitle;
-        TextField textStartowe;
-        TextField textDocelowe;
-        DateField dateOdlot;
-        Button buttonSzukaj;
+
 
         HorizontalLayout footer;
         FormLayout formLayout;
@@ -31,12 +32,6 @@ public class Trasy extends VerticalLayout implements View
         addComponent(formLayout);
         setComponentAlignment(formLayout, Alignment.TOP_CENTER);
 
-        labelGridTitle = new Label("Wyszukiwarka");
-        labelGridTitle.addStyleName("h2");
-        labelGridTitle.addStyleName("colored");
-
-        formLayout.addComponent(labelGridTitle);
-
         //grid
 
         footer = new HorizontalLayout();
@@ -45,9 +40,9 @@ public class Trasy extends VerticalLayout implements View
 
         gridTrasy = new Grid<>();
         gridTrasy.getEditor().setEnabled(true);
-        gridTrasy.setWidth("1050");
+        gridTrasy.setWidth("1117px");
         gridTrasy.setHeight("500");
-
+        gridTrasy.setItems(main.getLotyList());
         /* jak będzie jakiś pracownik to warunek:
 
             public bool mozeEdytowac()
@@ -63,23 +58,6 @@ public class Trasy extends VerticalLayout implements View
             gridTrasy.getColumn("ID").setEditable(mozeEdytowac());
 
         */
-
-        textStartowe = new TextField("Lotnisko startowe");
-        textStartowe.setRequiredIndicatorVisible(true);
-
-        textDocelowe = new TextField("Lotnisko docelowe");
-        textDocelowe.setRequiredIndicatorVisible(true);
-
-        dateOdlot = new DateField("Data odlotu");
-        dateOdlot.setRequiredIndicatorVisible(true);
-
-        buttonSzukaj = new Button("Szukaj");
-        buttonSzukaj.addStyleName("primary");
-
-        formLayout.addComponent(textStartowe);
-        formLayout.addComponent(textDocelowe);
-        formLayout.addComponent(dateOdlot);
-        formLayout.addComponent(buttonSzukaj);
         formLayout.addComponent(footer);
 
         gridTrasy.addColumn (Loty::getID).setCaption("Nr");
@@ -96,11 +74,15 @@ public class Trasy extends VerticalLayout implements View
         //gridTrasy.getColumn("Data przylotu").setEditable(false);
         gridTrasy.addColumn(Loty::getGodzinaPrzylotu).setCaption("Godzina przylotu");
         //gridTrasy.getColumn("Godzina przylotu").setEditable(false);
-        gridTrasy.addColumn(Loty::getCenaBiletu).setCaption("Cena biletu");
-        //gridTrasy.getColumn("Cena biletu").setEditable(false);
+
+        gridTrasy.addColumn(loty -> "Zarezerwuj", new ButtonRenderer(clickEvent ->
+        {
+            Notification.show("zarezerwowane ziomeczku!");
+        })).setCaption("Zarezerwuj") ;
 
 
         footer.addComponent(gridTrasy);
+        //footer.addComponent(buttonZarezerwuj);
         this.addComponent(footer);
     }
 

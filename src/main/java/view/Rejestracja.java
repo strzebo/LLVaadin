@@ -54,6 +54,7 @@ public class Rejestracja extends VerticalLayout implements View
         pass = new PasswordField("Hasło");
         pass.setRequiredIndicatorVisible(true);
 
+
         textAddress = new TextField("Adres korespondecyjny");
         textAddress.setRequiredIndicatorVisible(true);
 
@@ -90,19 +91,24 @@ public class Rejestracja extends VerticalLayout implements View
 
         buttonConfirm.addClickListener((Button.ClickListener) clickEvent ->
         {
-            try
+            if(textName.getValue().isEmpty() || textLastName.getValue().isEmpty() ||textEmail.getValue().isEmpty() || pass.getValue().isEmpty()
+                    || textAddress.getValue().isEmpty() || textPhoneNumber.getValue().isEmpty() || textIDNumber.getValue().isEmpty())
+                Notification.show("Proszę uzupełnić wszystkie pola!");
+            else
             {
-                mainLogic.singUp(textName.getValue(), textLastName.getValue(), textEmail.getValue(), pass.getValue(), textAddress.getValue(), textPhoneNumber.getValue(), textIDNumber.getValue());
-            } catch (SQLException e)
-            {
-                e.printStackTrace();
+                try
+                {
+                    mainLogic.singUp(textName.getValue(), textLastName.getValue(), textEmail.getValue(), pass.getValue(), textAddress.getValue(), textPhoneNumber.getValue(), textIDNumber.getValue());
+                } catch (SQLException e)
+                {
+                    e.printStackTrace();
+                }
             }
 
 
             Notification.show("Rejestracja przebiegła pomyślnie!");
 
             Page.getCurrent().reload() ;
-            getUI().getNavigator().navigateTo("login");
         });
 
         Button buttonCancel = new Button("Anuluj");
