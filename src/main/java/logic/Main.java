@@ -36,7 +36,7 @@ public class Main
 
 
 
-        Uzytkownik uzytkownik = new Uzytkownik(name, lastName, email, password, address, phoneNumber, idNumber);
+        //Uzytkownik uzytkownik = new Uzytkownik(name, lastName, email, password, address, phoneNumber, idNumber);
 
         value = "'" + name + "', '" + lastName + "', '" + email + "', '" + password + "', '" + address + "', '" + phoneNumber + "','" + idNumber + "','" + typKonta + "'";
         db.Insert("uzytkownik",columns,value);

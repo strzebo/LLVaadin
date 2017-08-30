@@ -4,7 +4,6 @@ import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener;
 import com.vaadin.shared.ui.MarginInfo;
 import com.vaadin.ui.*;
-import com.vaadin.ui.renderers.ButtonRenderer;
 import logic.Loty;
 import logic.Main;
 
@@ -76,6 +75,7 @@ public class Trasy extends VerticalLayout implements View
         gridTrasy.addColumn(Loty::getGodzinaPrzylotu).setCaption("Godzina przylotu");
         //gridTrasy.getColumn("Godzina przylotu").setEditable(false);
 
+        /*
         gridTrasy.addColumn(loty -> "Zarezerwuj", new ButtonRenderer(clickEvent ->
         {
             if(main.getUserID() < 1)
@@ -84,14 +84,17 @@ public class Trasy extends VerticalLayout implements View
             }
             else
             {
-                //main.rezerwacja(,main.getUserID(), "Zarezerwowano");
+                main.rezerwacja(gridTrasy.,main.getUserID(), "Zarezerwowano");
                 Notification.show("zarezerwowane ziomeczku!");
             }
         })).setCaption("Zarezerwuj") ;
 
+*/
+        Button buttonZarezerwuj = new Button("Zarezerwuj");
+        buttonZarezerwuj.addStyleName("primary");
 
         footer.addComponent(gridTrasy);
-        //footer.addComponent(buttonZarezerwuj);
+        footer.addComponent(buttonZarezerwuj);
         this.addComponent(footer);
     }
 

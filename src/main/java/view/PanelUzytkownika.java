@@ -162,7 +162,13 @@ public class PanelUzytkownika extends VerticalLayout implements View
         {
             contentLayout.removeAllComponents();
             addWelcomeTextPU(caption);
-            contentLayout.addComponent(getComponentPU(componentName));
+            try
+            {
+                contentLayout.addComponent(getComponentPU(componentName));
+            } catch (SQLException e)
+            {
+                e.printStackTrace();
+            }
         });
     }
 

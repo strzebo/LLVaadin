@@ -31,7 +31,13 @@ public class MyUI extends UI
         navigator.addView("panelsprzedawcy", new PanelSprzedawcy());
         navigator.addView("zmianadanych", new ZmianaDanych());
         navigator.addView("rejestracja", new Rejestracja());
-        navigator.addView("rezerwacja", new Rezerwacja());
+        try
+        {
+            navigator.addView("rezerwacja", new Rezerwacja());
+        } catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
         try
         {
             navigator.addView("trasy", new Trasy());
