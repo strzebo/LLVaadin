@@ -102,7 +102,7 @@ public class Main
         db.Update("uzytkownik",set,where);
     }
 
-    public void rezerwacja(int IDlotu, int IDKlienta, int stanRezerwacji) throws SQLException
+    public void rezerwacja(int IDlotu, int IDKlienta, String stanRezerwacji) throws SQLException
     {
         DbConnection db = new DbConnection();
 
@@ -110,6 +110,34 @@ public class Main
         String value = "'" + IDlotu + "', '" + IDKlienta + "'";
 
         db.Insert("rezerwacja",columns,value);
+    }
+
+    public List<Loty> getRezerwacjeList() throws SQLException
+    {
+        DbConnection db = new DbConnection();
+        List<Loty> lotyList = new ArrayList<>();
+
+        ResultSet resultSet = db.Result("","lot","");
+
+        while(resultSet.next())
+        {
+            lotyList.add
+                    (
+                            new Loty
+                                    (
+                                            resultSet.getInt("lot.ID"),
+                                            resultSet.getString("LotniskoStartowe"),
+                                            resultSet.getString("LotniskoDocelowe"),
+                                            resultSet.getDate("DataOdlotu"),
+                                            resultSet.getDate("DataPrzylotu"),
+                                            resultSet.getTime("Odlot"),
+                                            resultSet.getTime("Przylot")
+                                    )
+                    );
+        }
+        db.Close();
+
+        return  lotyList;
     }
 
 }

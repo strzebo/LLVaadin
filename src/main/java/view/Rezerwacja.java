@@ -22,7 +22,7 @@ public class Rezerwacja extends VerticalLayout implements View
         addComponent(formLayout);
         setComponentAlignment(formLayout, Alignment.TOP_CENTER);
 
-        HorizontalLayout footer = new HorizontalLayout();
+        VerticalLayout footer = new VerticalLayout();
 
         footer.setMargin(new MarginInfo(false, false, true, false));
         footer.setSpacing(true);
@@ -43,20 +43,25 @@ public class Rezerwacja extends VerticalLayout implements View
 
         formLayout.addComponent(footer);
 
-        gridRezerwacje.addColumn(Rezerwacje::getID).setCaption("ID");
-        gridRezerwacje.addColumn(Rezerwacje::getNazwa).setCaption("Nazwa");
-        gridRezerwacje.addColumn(Rezerwacje::getLoty).setCaption("Lot");
+        gridRezerwacje.addColumn(Rezerwacje::getID).setCaption("Nr rezerwacji");
+        gridRezerwacje.addColumn(Rezerwacje::getIDLotu).setCaption("Nr lotu");
+        gridRezerwacje.addColumn(Rezerwacje::getStanRezerwacji).setCaption("Stan rezerwacji");
 
         footer.addComponent(gridRezerwacje);
-        footer.addComponent(buttonKup);
-        footer.addComponent(buttonAnuluj);
 
-        footer.setExpandRatio(buttonKup,1);
-        footer.setExpandRatio(buttonAnuluj,1);
+        HorizontalLayout buttony = new HorizontalLayout();
 
-        footer.setComponentAlignment(buttonKup, Alignment.TOP_CENTER);
-        //nie dziala buttonAnuluj bo sie chowa gdzieś..
-        footer.setComponentAlignment(buttonAnuluj, Alignment.BOTTOM_CENTER);
+        buttony.addComponent(buttonKup);
+        buttony.addComponent(buttonAnuluj);
+
+        buttony.setExpandRatio(buttonKup,1);
+        buttony.setExpandRatio(buttonAnuluj,1);
+
+        buttony.setComponentAlignment(buttonKup, Alignment.TOP_CENTER);
+        buttony.setComponentAlignment(buttonAnuluj, Alignment.TOP_CENTER);
+
+        footer.addComponent(buttony);
+
         this.addComponent(footer);
     }
 
