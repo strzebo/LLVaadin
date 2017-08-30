@@ -45,7 +45,12 @@ public class MyUI extends UI
         {
             e.printStackTrace();
         }
-        navigator.addView("historiaperacji", new HistoriaOperacji());
+        try {
+            navigator.addView("historiaperacji", new HistoriaOperacji());
+        } catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
         navigator.addView("konto", new Konto());
 
         if(navigator.getState().isEmpty() || navigator.getState().equals("login") || navigator.getState().equals("rejestracja"))

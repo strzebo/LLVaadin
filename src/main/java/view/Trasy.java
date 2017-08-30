@@ -2,6 +2,7 @@ package view;
 
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener;
+import com.vaadin.server.Page;
 import com.vaadin.shared.ui.MarginInfo;
 import com.vaadin.ui.*;
 import logic.Loty;
@@ -85,6 +86,7 @@ public class Trasy extends VerticalLayout implements View
             try
             {
                 main.rezerwacja(selection.getValue().getID(),Main.getUserID(),"Zarezerwowano");
+                Notification.show("Rezerwacja została dokonana!");
             } catch (SQLException e)
             {
                 e.printStackTrace();

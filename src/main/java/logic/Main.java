@@ -112,12 +112,13 @@ public class Main
         db.Insert("rezerwacja",columns,value);
     }
 
-    public List<Rezerwacje> getRezerwacjeList(int IDKlienta) throws SQLException
+    public List<Rezerwacje> getRezerwacjeList(int IDKlienta, String stanRezerwacji) throws SQLException
     {
         DbConnection db = new DbConnection();
         List<Rezerwacje> rezerwacjeList = new ArrayList<>();
-        String select = "ID, IDLotu, IDKlienta, StanRezerwacji";
-        String where = "IDKlient = " + IDKlienta;
+        String select = "ID, IDLotu, IDKlient, StanRezerwacji";
+
+        String where = "IDKlient = " + IDKlienta + " AND StanRezerwacji = '" + stanRezerwacji + "'";
 
         ResultSet resultSet = db.Result(select,"rezerwacja",where);
 
@@ -129,7 +130,7 @@ public class Main
                                     (
                                             resultSet.getInt("rezerwacja.ID"),
                                             resultSet.getInt("IDLotu"),
-                                            resultSet.getInt("IDKlienta"),
+                                            resultSet.getInt("IDKlient"),
                                             resultSet.getString("StanRezerwacji")
                                     )
                     );
@@ -137,6 +138,16 @@ public class Main
         db.Close();
 
         return  rezerwacjeList;
+    }
+
+    public void kupBilet(int IDLotu, String stanRezerwacji) throws SQLException
+    {
+        DbConnection db = new DbConnection();
+
+        String set = "StanRezerwacji = '" + stanRezerwacji + "'";
+        String where = "ID = '" + IDLotu + "'";
+
+        db.Update("rezerwacja",set,where);
     }
 
 }

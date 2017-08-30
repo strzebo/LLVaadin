@@ -2,6 +2,7 @@ package view;
 
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener;
+import com.vaadin.server.Page;
 import com.vaadin.shared.ui.MarginInfo;
 import com.vaadin.ui.*;
 import logic.Rezerwacje;
@@ -35,9 +36,11 @@ public class Rezerwacja extends VerticalLayout implements View
         gridRezerwacje.getEditor().setEnabled(true);
         gridRezerwacje.setWidth("1050");
         gridRezerwacje.setHeight("500");
-        gridRezerwacje.setItems(main.getRezerwacjeList(main.getUserID()));
+        gridRezerwacje.setItems(main.getRezerwacjeList(main.getUserID(), "Zarezerwowano"));
+        gridRezerwacje.setSelectionMode(Grid.SelectionMode.SINGLE);
+        SingleSelect<Rezerwacje> selection = gridRezerwacje.asSingleSelect();
 
-        Button buttonKup = new Button("Potwierdź rezerwację");
+        Button buttonKup = new Button("Kup bilet");
         buttonKup.addStyleName("primary");
         buttonKup.setSizeUndefined();
 
@@ -57,6 +60,20 @@ public class Rezerwacja extends VerticalLayout implements View
         HorizontalLayout buttony = new HorizontalLayout();
 
         buttony.addComponent(buttonKup);
+
+        buttonKup.addClickListener((Button.ClickListener) event ->
+        {
+            try
+            {
+                main.kupBilet(selection.getValue().getID(),"Zakupiony");
+                Notification.show("Bilet został kupiony!");
+                Page.getCurrent().reload() ;
+            } catch (SQLException e)
+            {
+                e.printStackTrace();
+            }
+        });
+
         buttony.addComponent(buttonAnuluj);
 
         buttony.setExpandRatio(buttonKup,1);
