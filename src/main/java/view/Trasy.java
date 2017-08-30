@@ -24,7 +24,7 @@ public class Trasy extends VerticalLayout implements View
         setMargin(true);
 
         formLayout = new FormLayout();
-        formLayout. setMargin(false);
+        formLayout.setMargin(false);
         formLayout.setWidth("35%");
         formLayout.addStyleName("dark");
 
@@ -77,8 +77,6 @@ public class Trasy extends VerticalLayout implements View
         gridTrasy.addColumn(Loty::getGodzinaPrzylotu).setCaption("Godzina przylotu");
         //gridTrasy.getColumn("Godzina przylotu").setEditable(false);
 
-
-
         Button buttonZarezerwuj = new Button("Zarezerwuj");
         buttonZarezerwuj.addStyleName("primary");
 
@@ -94,7 +92,12 @@ public class Trasy extends VerticalLayout implements View
         });
 
         footer.addComponent(gridTrasy);
-        footer.addComponent(buttonZarezerwuj);
+
+        if(main.getUserID() > 0)
+        {
+            footer.addComponent(buttonZarezerwuj);
+        }
+
         this.addComponent(footer);
     }
 
