@@ -107,37 +107,36 @@ public class Main
         DbConnection db = new DbConnection();
 
         String columns = "IDLotu, IDKlienta, StanRezerwacji";
-        String value = "'" + IDlotu + "', '" + IDKlienta + "'";
+        String value = "'" + IDlotu + "', '" + IDKlienta + "', '" + stanRezerwacji + "'";
 
         db.Insert("rezerwacja",columns,value);
     }
 
-    public List<Loty> getRezerwacjeList() throws SQLException
+    public List<Rezerwacje> getRezerwacjeList(int IDKlienta) throws SQLException
     {
         DbConnection db = new DbConnection();
-        List<Loty> lotyList = new ArrayList<>();
+        List<Rezerwacje> rezerwacjeList = new ArrayList<>();
+        String select = "ID, IDLotu, IDKlienta, StanRezerwacji";
+        String where = "IDKlient = " + IDKlienta;
 
-        ResultSet resultSet = db.Result("","lot","");
+        ResultSet resultSet = db.Result(select,"rezerwacja",where);
 
         while(resultSet.next())
         {
-            lotyList.add
+            rezerwacjeList.add
                     (
-                            new Loty
+                            new Rezerwacje
                                     (
-                                            resultSet.getInt("lot.ID"),
-                                            resultSet.getString("LotniskoStartowe"),
-                                            resultSet.getString("LotniskoDocelowe"),
-                                            resultSet.getDate("DataOdlotu"),
-                                            resultSet.getDate("DataPrzylotu"),
-                                            resultSet.getTime("Odlot"),
-                                            resultSet.getTime("Przylot")
+                                            resultSet.getInt("rezerwacja.ID"),
+                                            resultSet.getInt("IDLotu"),
+                                            resultSet.getInt("IDKlienta"),
+                                            resultSet.getString("StanRezerwacji")
                                     )
                     );
         }
         db.Close();
 
-        return  lotyList;
+        return  rezerwacjeList;
     }
 
 }

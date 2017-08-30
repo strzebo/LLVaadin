@@ -5,11 +5,15 @@ import com.vaadin.navigator.ViewChangeListener;
 import com.vaadin.shared.ui.MarginInfo;
 import com.vaadin.ui.*;
 import logic.Rezerwacje;
+import logic.Main;
+
+import java.sql.SQLException;
 
 public class Rezerwacja extends VerticalLayout implements View
 {
-    public Rezerwacja()
+    public Rezerwacja() throws SQLException
     {
+        Main main = new Main();
         FormLayout formLayout = new FormLayout();
 
         setMargin(true);
@@ -31,6 +35,7 @@ public class Rezerwacja extends VerticalLayout implements View
         gridRezerwacje.getEditor().setEnabled(true);
         gridRezerwacje.setWidth("1050");
         gridRezerwacje.setHeight("500");
+        gridRezerwacje.setItems(main.getRezerwacjeList(main.getUserID()));
 
         Button buttonKup = new Button("Potwierdź rezerwację");
         buttonKup.addStyleName("primary");
