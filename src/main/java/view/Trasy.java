@@ -40,9 +40,11 @@ public class Trasy extends VerticalLayout implements View
         gridTrasy = new Grid<>();
         gridTrasy.getEditor().setEnabled(true);
         gridTrasy.setSelectionMode(Grid.SelectionMode.SINGLE);
+        SingleSelect<Loty> selection = gridTrasy.asSingleSelect();
         gridTrasy.setWidth("1117px");
         gridTrasy.setHeight("700");
         gridTrasy.setItems(main.getLotyList());
+
         /* jak będzie jakiś pracownik to warunek:
 
             public bool mozeEdytowac()
@@ -75,23 +77,21 @@ public class Trasy extends VerticalLayout implements View
         gridTrasy.addColumn(Loty::getGodzinaPrzylotu).setCaption("Godzina przylotu");
         //gridTrasy.getColumn("Godzina przylotu").setEditable(false);
 
-        /*
-        gridTrasy.addColumn(loty -> "Zarezerwuj", new ButtonRenderer(clickEvent ->
-        {
-            if(main.getUserID() < 1)
-            {
-                UI.getCurrent().getNavigator().navigateTo("login");
-            }
-            else
-            {
-                main.rezerwacja(gridTrasy.,main.getUserID(), "Zarezerwowano");
-                Notification.show("zarezerwowane ziomeczku!");
-            }
-        })).setCaption("Zarezerwuj") ;
 
-*/
+
         Button buttonZarezerwuj = new Button("Zarezerwuj");
         buttonZarezerwuj.addStyleName("primary");
+
+        buttonZarezerwuj.addClickListener((Button.ClickListener) event ->
+        {
+            try
+            {
+                main.rezerwacja(selection.getValue().getID(),Main.getUserID(),"Zarezerwowano");
+            } catch (SQLException e)
+            {
+                e.printStackTrace();
+            }
+        });
 
         footer.addComponent(gridTrasy);
         footer.addComponent(buttonZarezerwuj);
