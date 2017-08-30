@@ -6,12 +6,18 @@ import com.vaadin.shared.ui.MarginInfo;
 import com.vaadin.ui.*;
 import logic.Main;
 
+import java.sql.SQLException;
+
+import static logic.Main.getUserID;
+import static logic.Main.getUserType;
+
 public class ZmianaDanych extends VerticalLayout implements View
 {
+    Main mainLogic = new Main();
+
     public ZmianaDanych()
     {
         FormLayout formLayout = new FormLayout();
-        Main mainLogic = new Main();
 
         Label labelHeader = new Label("Dane personalne");
         labelHeader.addStyleName("h2");
@@ -62,9 +68,17 @@ public class ZmianaDanych extends VerticalLayout implements View
         Button buttonConfirm = new Button("Potwierdź");
         buttonConfirm.addStyleName("primary");
 
+
+
         buttonConfirm.addClickListener((Button.ClickListener) clickEvent ->
         {
-
+            try{
+                mainLogic.updateData(getUserID(), textName.getValue(), textLastName.getValue(), textEmail.getValue(), pass.getValue(), textAddress.getValue(), textPhoneNumber.getValue(), textIDNumber.getValue(), getUserType());
+            }
+            catch (SQLException e)
+            {
+                e.printStackTrace();
+            }
 
             Notification.show("Zmiana danych przebiegła pomyślnie!");
         });

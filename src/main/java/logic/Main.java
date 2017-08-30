@@ -92,4 +92,14 @@ public class Main
         return  lotyList;
     }
 
+    public void updateData(int ID, String name, String lastName, String email, String password, String address, String phoneNumber, String idNumber, int userType) throws SQLException
+    {
+        DbConnection db = new DbConnection();
+
+        String set = "Imie = '" + name + "', Nazwisko = '" + lastName + "', Email = '" + email + "', Haslo = '" + password + "', Adres = '" + address + "', Telefon = '" + phoneNumber + "', NrDokumentu = '" + idNumber + "', TypKonta = '" + userType + "'";
+        String where = "ID = '" + ID + "'";
+
+        db.Update("uzytkownik",set,where);
+    }
+
 }

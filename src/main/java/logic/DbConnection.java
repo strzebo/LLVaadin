@@ -79,7 +79,9 @@ public class DbConnection
         try
         {
             Initialize();
-            cm = "UPDATE " + update + " SET " + set + " WHERE " + where;
+            cm = "UPDATE " + update +
+                    " SET " + set +
+                    " WHERE " + where;
 
             statement.executeUpdate(cm);
 

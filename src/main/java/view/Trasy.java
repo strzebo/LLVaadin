@@ -41,7 +41,7 @@ public class Trasy extends VerticalLayout implements View
         gridTrasy = new Grid<>();
         gridTrasy.getEditor().setEnabled(true);
         gridTrasy.setWidth("1117px");
-        gridTrasy.setHeight("500");
+        gridTrasy.setHeight("700");
         gridTrasy.setItems(main.getLotyList());
         /* jak będzie jakiś pracownik to warunek:
 
