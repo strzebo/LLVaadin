@@ -102,11 +102,11 @@ public class Main
         db.Update("uzytkownik",set,where);
     }
 
-    public void rezerwacja(int IDlotu, int IDKlienta) throws SQLException
+    public void rezerwacja(int IDlotu, int IDKlienta, int stanRezerwacji) throws SQLException
     {
         DbConnection db = new DbConnection();
 
-        String columns = "IDLotu, IDKlienta";
+        String columns = "IDLotu, IDKlienta, StanRezerwacji";
         String value = "'" + IDlotu + "', '" + IDKlienta + "'";
 
         db.Insert("rezerwacja",columns,value);

@@ -84,7 +84,7 @@ public class Trasy extends VerticalLayout implements View
             }
             else
             {
-                //main.rezerwacja(,main.getUserID());
+                //main.rezerwacja(,main.getUserID(), 1);
                 Notification.show("zarezerwowane ziomeczku!");
             }
         })).setCaption("Zarezerwuj") ;
