@@ -102,4 +102,14 @@ public class Main
         db.Update("uzytkownik",set,where);
     }
 
+    public void rezerwacja(int IDlotu, int IDKlienta) throws SQLException
+    {
+        DbConnection db = new DbConnection();
+
+        String columns = "IDLotu, IDKlienta";
+        String value = "'" + IDlotu + "', '" + IDKlienta + "'";
+
+        db.Insert("rezerwacja",columns,value);
+    }
+
 }

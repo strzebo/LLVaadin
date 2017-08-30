@@ -40,6 +40,7 @@ public class Trasy extends VerticalLayout implements View
 
         gridTrasy = new Grid<>();
         gridTrasy.getEditor().setEnabled(true);
+        gridTrasy.setSelectionMode(Grid.SelectionMode.SINGLE);
         gridTrasy.setWidth("1117px");
         gridTrasy.setHeight("700");
         gridTrasy.setItems(main.getLotyList());
@@ -77,7 +78,15 @@ public class Trasy extends VerticalLayout implements View
 
         gridTrasy.addColumn(loty -> "Zarezerwuj", new ButtonRenderer(clickEvent ->
         {
-            Notification.show("zarezerwowane ziomeczku!");
+            if(main.getUserID() < 1)
+            {
+                UI.getCurrent().getNavigator().navigateTo("login");
+            }
+            else
+            {
+                //main.rezerwacja(,main.getUserID());
+                Notification.show("zarezerwowane ziomeczku!");
+            }
         })).setCaption("Zarezerwuj") ;
 
 
