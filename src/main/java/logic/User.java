@@ -9,9 +9,10 @@ public class User
     protected String address;
     protected String phoneNumber;
     protected String idNumber;
+    protected int typKonta;
 
 
-    public User(String name, String lastName, String email, String password, String address, String phoneNumber, String idNumber)
+    public User(String name, String lastName, String email, String password, String address, String phoneNumber, String idNumber, int typKonta)
     {
         this.name = name;
         this.lastName = lastName;
@@ -20,6 +21,7 @@ public class User
         this.address = address;
         this.phoneNumber = phoneNumber;
         this.idNumber = idNumber;
+        this.typKonta = typKonta;
     }
 
     public String getName() {   return name;    }
@@ -36,5 +38,5 @@ public class User
 
     public String getIdNumber() {   return idNumber; }
 
-    public String getType() {   return "";  }
+    public int getType() {   return typKonta;  }
 }

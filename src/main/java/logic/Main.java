@@ -151,4 +151,33 @@ public class Main
         db.Update("rezerwacja",set,where);
     }
 
+    public List<Uzytkownik> getUzytkownikList() throws SQLException
+    {
+        DbConnection db = new DbConnection();
+        List<Uzytkownik> uzytkownikList = new ArrayList<>();
+
+        ResultSet resultSet = db.Result("","lot","");
+
+        while(resultSet.next())
+        {
+            uzytkownikList.add
+                    (
+                            new Uzytkownik
+                                    (
+                                            resultSet.getString("Imie"),
+                                            resultSet.getString("Nazwisko"),
+                                            resultSet.getString("Email"),
+                                            resultSet.getString("Haslo"),
+                                            resultSet.getString("Adres"),
+                                            resultSet.getString("Telefon"),
+                                            resultSet.getString("Przylot"),
+                                            resultSet.getInt("TypKonta")
+                                    )
+                    );
+        }
+        db.Close();
+
+        return  uzytkownikList;
+    }
+
 }

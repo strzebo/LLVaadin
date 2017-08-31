@@ -4,12 +4,16 @@ import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener;
 import com.vaadin.shared.ui.MarginInfo;
 import com.vaadin.ui.*;
-import logic.Konta;
+import logic.Uzytkownik;
+import logic.Main;
+
+import java.sql.SQLException;
 
 public class Konto extends VerticalLayout implements View
 {
     public Konto()
     {
+        Main main = new Main();
         FormLayout formLayout = new FormLayout();
 
         setMargin(true);
@@ -27,19 +31,23 @@ public class Konto extends VerticalLayout implements View
         footer.setMargin(new MarginInfo(false, false, true, false));
         footer.setSpacing(true);
 
-        Grid<Konta> gridRezerwacje = new Grid<>();
-        gridRezerwacje.getEditor().setEnabled(true);
-        gridRezerwacje.setWidth("1050");
-        gridRezerwacje.setHeight("500");
+        Grid<Uzytkownik> gridUzytkownicy = new Grid<>();
+        gridUzytkownicy.getEditor().setEnabled(true);
+        gridUzytkownicy.setWidth("1050");
+        gridUzytkownicy.setHeight("500");
+        try
+        {
+            gridUzytkownicy.setItems(main.getUzytkownikList());
+        } catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
+        gridUzytkownicy.setSelectionMode(Grid.SelectionMode.NONE);
 
 
         formLayout.addComponent(footer);
 
-        gridRezerwacje.addColumn(Konta::getID).setCaption("ID");
-        gridRezerwacje.addColumn(Konta::getAdministrator).setCaption("Administrator");
-        gridRezerwacje.addColumn(Konta::getUser).setCaption("Użytkownik");
-
-        footer.addComponent(gridRezerwacje);
+        footer.addComponent(gridUzytkownicy);
         this.addComponent(footer);
     }
     
