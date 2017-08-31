@@ -36,7 +36,14 @@ public class Rezerwacja extends VerticalLayout implements View
         gridRezerwacje.getEditor().setEnabled(true);
         gridRezerwacje.setWidth("1050");
         gridRezerwacje.setHeight("500");
-        gridRezerwacje.setItems(main.getRezerwacjeList(main.getUserID(), "Zarezerwowano"));
+        if(main.getUserType() == 1)
+        {
+            gridRezerwacje.setItems(main.getRezerwacjeList(main.getUserID(), "Zarezerwowano"));
+        }
+        else
+        {
+            gridRezerwacje.setItems(main.getRezerwacjeList(main.getUserID(), "Zarezerwowano"));
+        }
         gridRezerwacje.setSelectionMode(Grid.SelectionMode.SINGLE);
         SingleSelect<Rezerwacje> selection = gridRezerwacje.asSingleSelect();
 
@@ -59,7 +66,10 @@ public class Rezerwacja extends VerticalLayout implements View
 
         HorizontalLayout buttony = new HorizontalLayout();
 
-        buttony.addComponent(buttonKup);
+        if(main.getUserType() == 1)
+        {
+            buttony.addComponent(buttonKup);
+        }
 
         buttonKup.addClickListener((Button.ClickListener) event ->
         {

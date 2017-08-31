@@ -108,13 +108,17 @@ public class Main
         String select = "ID, IDLotu, IDKlient, StanRezerwacji";
         String where;
 
-        if(stanRezerwacji != "")
+        if(stanRezerwacji != "" && getUserType() == 1)
         {
             where = "IDKlient = " + IDKlienta + " AND StanRezerwacji = '" + stanRezerwacji + "'";
         }
-        else
+        else if (stanRezerwacji == "" && getUserType() == 1)
         {
             where = "IDKlient = " + IDKlienta;
+        }
+        else
+        {
+            where = "";
         }
 
         ResultSet resultSet = db.Result(select,"rezerwacja",where);

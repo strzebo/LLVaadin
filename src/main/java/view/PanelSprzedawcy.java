@@ -182,7 +182,7 @@ public class PanelSprzedawcy extends VerticalLayout implements View
 
         this.navigateHomePS("Home");
 
-        this.addMenuOptionPS("Zarządzaj rezerwacją", "Rezerwacja");
+        this.addMenuOptionPS("Zarzadzaj rezerwacjami", "Rezerwacja");
         this.addMenuOptionPS("Zarządzaj kontami", "Konto");
         this.addMenuOptionPS("Zmiana danych", "ZmianaDanych");
 
