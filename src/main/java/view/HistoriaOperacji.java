@@ -36,7 +36,7 @@ public class HistoriaOperacji extends VerticalLayout implements View
         gridRezerwacje.getEditor().setEnabled(true);
         gridRezerwacje.setWidth("1050");
         gridRezerwacje.setHeight("500");
-        gridRezerwacje.setItems(main.getRezerwacjeList(main.getUserID(),"Zakupiony"));
+        gridRezerwacje.setItems(main.getRezerwacjeList(main.getUserID(),""));
         gridRezerwacje.setSelectionMode(Grid.SelectionMode.SINGLE);
         SingleSelect<Rezerwacje> selection = gridRezerwacje.asSingleSelect();
 
@@ -58,6 +58,19 @@ public class HistoriaOperacji extends VerticalLayout implements View
         buttony.addComponent(buttonAnuluj);
 
         buttony.setExpandRatio(buttonAnuluj,1);
+
+        buttonAnuluj.addClickListener((Button.ClickListener) event ->
+        {
+            try
+            {
+                main.zmianaStanuRezerwacji(selection.getValue().getID(),"Anulowana");
+                Notification.show("Zakup biletu został anulowany!");
+                Page.getCurrent().reload() ;
+            } catch (SQLException e)
+            {
+                e.printStackTrace();
+            }
+        });
 
         buttony.setComponentAlignment(buttonAnuluj, Alignment.TOP_CENTER);
 

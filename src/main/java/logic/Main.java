@@ -117,8 +117,16 @@ public class Main
         DbConnection db = new DbConnection();
         List<Rezerwacje> rezerwacjeList = new ArrayList<>();
         String select = "ID, IDLotu, IDKlient, StanRezerwacji";
+        String where;
 
-        String where = "IDKlient = " + IDKlienta + " AND StanRezerwacji = '" + stanRezerwacji + "'";
+        if(stanRezerwacji != "")
+        {
+            where = "IDKlient = " + IDKlienta + " AND StanRezerwacji = '" + stanRezerwacji + "'";
+        }
+        else
+        {
+            where = "IDKlient = " + IDKlienta;
+        }
 
         ResultSet resultSet = db.Result(select,"rezerwacja",where);
 
@@ -140,7 +148,7 @@ public class Main
         return  rezerwacjeList;
     }
 
-    public void kupBilet(int IDLotu, String stanRezerwacji) throws SQLException
+    public void zmianaStanuRezerwacji(int IDLotu, String stanRezerwacji) throws SQLException
     {
         DbConnection db = new DbConnection();
 

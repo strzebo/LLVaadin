@@ -65,7 +65,7 @@ public class Rezerwacja extends VerticalLayout implements View
         {
             try
             {
-                main.kupBilet(selection.getValue().getID(),"Zakupiony");
+                main.zmianaStanuRezerwacji(selection.getValue().getID(),"Zakupiony");
                 Notification.show("Bilet został kupiony!");
                 Page.getCurrent().reload() ;
             } catch (SQLException e)
@@ -75,6 +75,19 @@ public class Rezerwacja extends VerticalLayout implements View
         });
 
         buttony.addComponent(buttonAnuluj);
+
+        buttonAnuluj.addClickListener((Button.ClickListener) event ->
+        {
+            try
+            {
+                main.zmianaStanuRezerwacji(selection.getValue().getID(),"Anulowana");
+                Notification.show("Rezerwacja została anulowana!");
+                Page.getCurrent().reload() ;
+            } catch (SQLException e)
+            {
+                e.printStackTrace();
+            }
+        });
 
         buttony.setExpandRatio(buttonKup,1);
         buttony.setExpandRatio(buttonAnuluj,1);
