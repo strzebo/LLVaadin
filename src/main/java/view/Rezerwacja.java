@@ -36,8 +36,7 @@ public class Rezerwacja extends VerticalLayout implements View
         gridRezerwacje.getEditor().setEnabled(true);
         gridRezerwacje.setWidth("1050");
         gridRezerwacje.setHeight("500");
-        if(main.getUserType() == 1)
-        {
+        if(main.getUserType() == 1) {
             gridRezerwacje.setItems(main.getRezerwacjeList(main.getUserID(), "Zarezerwowano"));
         }
         else

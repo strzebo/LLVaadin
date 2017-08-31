@@ -156,7 +156,7 @@ public class Main
         DbConnection db = new DbConnection();
         List<Uzytkownik> uzytkownikList = new ArrayList<>();
 
-        ResultSet resultSet = db.Result("","lot","");
+        ResultSet resultSet = db.Result("","uzytkownik","");
 
         while(resultSet.next())
         {
@@ -170,7 +170,7 @@ public class Main
                                             resultSet.getString("Haslo"),
                                             resultSet.getString("Adres"),
                                             resultSet.getString("Telefon"),
-                                            resultSet.getString("Przylot"),
+                                            resultSet.getString("NrDokumentu"),
                                             resultSet.getInt("TypKonta")
                                     )
                     );
