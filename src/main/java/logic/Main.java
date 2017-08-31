@@ -23,18 +23,7 @@ public class Main
 
         String columns = "Imie, Nazwisko, Email, Haslo, Adres, Telefon, NrDokumentu, TypKonta";
         String value;
-        int typKonta = 0;
-
-        if (idNumber.startsWith("2S"))
-            typKonta = 2;
-        else if (idNumber.startsWith("3K"))
-            typKonta = 3;
-        else if (idNumber.startsWith("4A"))
-            typKonta = 4;
-        else
-            typKonta = 1;
-
-
+        int typKonta = 1;
 
         //Uzytkownik uzytkownik = new Uzytkownik(name, lastName, email, password, address, phoneNumber, idNumber);
 
