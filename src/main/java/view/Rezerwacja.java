@@ -36,7 +36,11 @@ public class Rezerwacja extends VerticalLayout implements View
         gridRezerwacje.getEditor().setEnabled(true);
         gridRezerwacje.setWidth("1050");
         gridRezerwacje.setHeight("500");
-        if(main.getUserType() == 1) {
+        if(main.getUserType() == 0)
+        {
+
+        }
+        else if(main.getUserType() == 1) {
             gridRezerwacje.setItems(main.getRezerwacjeList(main.getUserID(), "Zarezerwowano"));
         }
         else
@@ -68,6 +72,8 @@ public class Rezerwacja extends VerticalLayout implements View
         if(main.getUserType() == 1)
         {
             buttony.addComponent(buttonKup);
+            buttony.setExpandRatio(buttonKup,1);
+            buttony.setComponentAlignment(buttonKup, Alignment.TOP_CENTER);
         }
 
         buttonKup.addClickListener((Button.ClickListener) event ->
@@ -98,10 +104,8 @@ public class Rezerwacja extends VerticalLayout implements View
             }
         });
 
-        buttony.setExpandRatio(buttonKup,1);
         buttony.setExpandRatio(buttonAnuluj,1);
 
-        buttony.setComponentAlignment(buttonKup, Alignment.TOP_CENTER);
         buttony.setComponentAlignment(buttonAnuluj, Alignment.TOP_CENTER);
 
         footer.addComponent(buttony);
