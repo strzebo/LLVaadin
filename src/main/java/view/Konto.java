@@ -1,21 +1,34 @@
 package view;
 
 import com.vaadin.data.Binder;
-import com.vaadin.data.HasValue;
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener;
 import com.vaadin.shared.ui.MarginInfo;
 import com.vaadin.ui.*;
 import logic.Uzytkownik;
 import logic.Main;
-
 import java.sql.SQLException;
 
 public class Konto extends VerticalLayout implements View
 {
+    Main main = new Main();
+    Grid<Uzytkownik> gridUzytkownicy = new Grid<>();
+    Binder<Uzytkownik> binder = new Binder<>(Uzytkownik.class);
+    Uzytkownik uzytkownik;
+    int ID;
+    TextField name = new TextField("Imię");
+    TextField lastName = new TextField("Nazwisko");
+    TextField email = new TextField("Email");
+    PasswordField pass = new PasswordField("Hasło");
+    TextField address = new TextField("Adres");
+    TextField phoneNumber = new TextField("Numer telefonu");
+    TextField idNumber = new TextField("Numer dokumentu");
+    TextField accountType = new TextField("Typ konta");
+    Button save = new Button("Zapisz"); //, e -> zapiszUzytkownika(ID, name.getValue(), lastName.getValue(), email.getValue(), pass.getValue(), address.getValue(), phoneNumber.getValue(), idNumber.getValue(), Integer.parseInt(accountType.getValue())));
+
+
     public Konto()
     {
-        Main main = new Main();
         FormLayout formLayout = new FormLayout();
 
         setMargin(true);
@@ -33,9 +46,8 @@ public class Konto extends VerticalLayout implements View
         footer.setMargin(new MarginInfo(false, false, true, false));
         footer.setSpacing(true);
 
-        Grid<Uzytkownik> gridUzytkownicy = new Grid<>();
         gridUzytkownicy.setWidth("1050");
-        gridUzytkownicy.setHeight("500");
+        gridUzytkownicy.setHeight("200");
         try
         {
             gridUzytkownicy.setItems(main.getUzytkownikList(main.getUserType()));
@@ -43,8 +55,9 @@ public class Konto extends VerticalLayout implements View
         {
             e.printStackTrace();
         }
-        
-        gridUzytkownicy.setSelectionMode(Grid.SelectionMode.NONE);
+
+        gridUzytkownicy.setSelectionMode(Grid.SelectionMode.SINGLE);
+        gridUzytkownicy.addColumn(Uzytkownik::getID).setCaption("ID");
         gridUzytkownicy.addColumn(Uzytkownik::getName).setCaption("Imię");
         gridUzytkownicy.addColumn(Uzytkownik::getLastName).setCaption("Nazwisko");
         gridUzytkownicy.addColumn(Uzytkownik::getEmail).setCaption("E-mail");
@@ -54,18 +67,54 @@ public class Konto extends VerticalLayout implements View
         gridUzytkownicy.addColumn(Uzytkownik::getIdNumber).setCaption("Numer dokumentu");
         gridUzytkownicy.addColumn(Uzytkownik::getType).setCaption("Typ konta");
 
-        Binder<Uzytkownik> binder = new Binder<>(Uzytkownik.class);
+        gridUzytkownicy.addSelectionListener(e ->
+        {
+            if(gridUzytkownicy.asSingleSelect().isEmpty())
+            {
+            }
+            else{
+                uzytkownik = gridUzytkownicy.asSingleSelect().getValue();
+                binder.setBean(uzytkownik);
+            }
+        });
+
+        binder.bindInstanceFields(this);
+
+        FormLayout formLayout2 = new FormLayout();
+        formLayout2.addComponent(name);
+        formLayout2.addComponent(lastName);
+        formLayout2.addComponent(email);
+        formLayout2.addComponent(pass);
+        formLayout2.addComponent(address);
+        formLayout2.addComponent(phoneNumber);
+        formLayout2.addComponent(idNumber);
+        formLayout2.addComponent(accountType);
+
+        save.addClickListener(e -> zapiszUzytkownika(ID, name.getValue(), lastName.getValue(), email.getValue(), pass.getValue(), address.getValue(), phoneNumber.getValue(), idNumber.getValue(), Integer.parseInt(accountType.getValue())));
+
+        formLayout2.addComponent(save);
 
         formLayout.addComponent(footer);
 
         footer.addComponent(gridUzytkownicy);
 
         this.addComponent(footer);
+
+        addComponent(formLayout2);
+
     }
     
     @Override
     public void enter(ViewChangeListener.ViewChangeEvent viewChangeEvent) {
 
+    }
+
+    public void zapiszUzytkownika(int ID, String name, String lastName, String email,String pass, String address, String phoneNumber, String idNumber, int accountType){
+        try{
+            main.updateData(ID, name, lastName, email, pass, address, phoneNumber, idNumber, accountType);
+        } catch (SQLException ex){
+            ex.printStackTrace();
+        }
     }
 
 
