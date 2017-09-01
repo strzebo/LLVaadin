@@ -91,6 +91,17 @@ public class Main
         db.Update("uzytkownik",set,where);
     }
 
+    public void updateLoty(int ID, String lotniskoStartowe, String lotniskoDocelowe, String dataOdlotu, String godzinaOdlotu, String dataPrzylotu, String godzinaPrzylotu)
+    {
+        DbConnection db = new DbConnection();
+
+        String set = "LotniskoStartowe = '" + lotniskoStartowe + "', LotniskoDocelowe = '" + lotniskoDocelowe + "',DataOdlotu = '" + dataOdlotu +
+                "', Odlot = '" + godzinaOdlotu + "', DataPrzylotu =' " + dataPrzylotu + "', Przylot = '" + godzinaPrzylotu + "'";
+        String where = "ID = '" + ID + "'";
+
+        db.Update("lot",set,where);
+    }
+
     public void updateSingleData(String zmienianaZmienna, String wartoscZmiennej, int ID) throws SQLException
     {
         DbConnection db = new DbConnection();

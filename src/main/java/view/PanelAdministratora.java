@@ -186,7 +186,7 @@ public class PanelAdministratora extends VerticalLayout implements View
 
         this.addMenuOptionPA("Zarządzaj rezerwacją", "Rezerwacja");
         this.addMenuOptionPA("Zarządzaj kontami", "Konto");
-        this.addMenuOptionPA("Zarządzaj trasami", "Trasy");
+        this.addMenuOptionPA("Zarządzaj trasami", "ZarzadzanieTrasami");
         this.addMenuOptionPA("Zmiana danych", "ZmianaDanych");
 
         this.addWelcomeTextPA("Super panel");

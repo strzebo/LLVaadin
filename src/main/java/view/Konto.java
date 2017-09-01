@@ -5,8 +5,9 @@ import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener;
 import com.vaadin.shared.ui.MarginInfo;
 import com.vaadin.ui.*;
-import logic.Uzytkownik;
 import logic.Main;
+import logic.Uzytkownik;
+
 import java.sql.SQLException;
 
 public class Konto extends VerticalLayout implements View
@@ -57,6 +58,8 @@ public class Konto extends VerticalLayout implements View
         }
 
         gridUzytkownicy.setSelectionMode(Grid.SelectionMode.SINGLE);
+        SingleSelect<Uzytkownik> selection = gridUzytkownicy.asSingleSelect();
+
         gridUzytkownicy.addColumn(Uzytkownik::getID).setCaption("ID");
         gridUzytkownicy.addColumn(Uzytkownik::getName).setCaption("Imię");
         gridUzytkownicy.addColumn(Uzytkownik::getLastName).setCaption("Nazwisko");
@@ -80,7 +83,7 @@ public class Konto extends VerticalLayout implements View
 
         binder.bindInstanceFields(this);
 
-        FormLayout formLayout2 = new FormLayout();
+        GridLayout formLayout2 = new GridLayout(4,2);
         formLayout2.addComponent(name);
         formLayout2.addComponent(lastName);
         formLayout2.addComponent(email);
@@ -89,8 +92,23 @@ public class Konto extends VerticalLayout implements View
         formLayout2.addComponent(phoneNumber);
         formLayout2.addComponent(idNumber);
         formLayout2.addComponent(accountType);
+        formLayout2.setMargin(true);
+        formLayout.setSpacing(true);
 
-        save.addClickListener(e -> zapiszUzytkownika(ID, name.getValue(), lastName.getValue(), email.getValue(), pass.getValue(), address.getValue(), phoneNumber.getValue(), idNumber.getValue(), Integer.parseInt(accountType.getValue())));
+        save.addClickListener(e -> {
+            try
+            {
+                main.updateData(selection.getValue().getID(),name.getValue() ,
+                        lastName.getValue(), email.getValue(), pass.getValue(),
+                        address.getValue(), phoneNumber.getValue(), idNumber.getValue(),
+                        Integer.parseInt(accountType.getValue())
+                );
+
+            } catch (SQLException e1)
+            {
+                e1.printStackTrace();
+            }
+        });
 
         formLayout2.addComponent(save);
 

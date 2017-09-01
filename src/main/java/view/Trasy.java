@@ -2,7 +2,6 @@ package view;
 
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener;
-import com.vaadin.server.Page;
 import com.vaadin.shared.ui.MarginInfo;
 import com.vaadin.ui.*;
 import logic.Loty;
@@ -40,43 +39,22 @@ public class Trasy extends VerticalLayout implements View
 
         gridTrasy = new Grid<>();
         gridTrasy.getEditor().setEnabled(true);
+
         gridTrasy.setSelectionMode(Grid.SelectionMode.SINGLE);
         SingleSelect<Loty> selection = gridTrasy.asSingleSelect();
         gridTrasy.setWidth("1117px");
         gridTrasy.setHeight("700");
         gridTrasy.setItems(main.getLotyList());
 
-        /* jak będzie jakiś pracownik to warunek:
-
-            public bool mozeEdytowac()
-            {
-                if(login.cośtam.getType != uzytkownik)
-                    return true;
-
-                return false;
-            }
-
-            i wtedy :
-
-            gridTrasy.getColumn("ID").setEditable(mozeEdytowac());
-
-        */
         formLayout.addComponent(footer);
 
         gridTrasy.addColumn (Loty::getID).setCaption("Nr");
-        //gridTrasy.getColumn("ID").setEditable(false);
         gridTrasy.addColumn(Loty::getLotniskoStartowe).setCaption("Lotnisko startowe");
-        //gridTrasy.getColumn("Lotnisko startowe").setEditable(false);
         gridTrasy.addColumn(Loty::getLotniskoDocelowe).setCaption("Lotnisko docelowe");
-        //gridTrasy.getColumn("Lotnisko docelowe").setEditable(false);
         gridTrasy.addColumn(Loty::getDataOdlotu).setCaption("Data odlotu");
-        //gridTrasy.getColumn("Data odlotu").setEditable(false);
         gridTrasy.addColumn(Loty::getGodzinaOdlotu).setCaption("Godzina odlotu");
-        //gridTrasy.getColumn("Godzina odlotu").setEditable(false);
         gridTrasy.addColumn(Loty::getDataPrzylotu).setCaption("Data przylotu");
-        //gridTrasy.getColumn("Data przylotu").setEditable(false);
         gridTrasy.addColumn(Loty::getGodzinaPrzylotu).setCaption("Godzina przylotu");
-        //gridTrasy.getColumn("Godzina przylotu").setEditable(false);
 
         Button buttonZarezerwuj = new Button("Zarezerwuj");
         buttonZarezerwuj.addStyleName("primary");
