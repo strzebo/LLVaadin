@@ -26,6 +26,10 @@ public class User
 
     public String getName() {   return name;    }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public String getLastName() {   return lastName;    }
 
     public String getEmail()    {   return email;   }

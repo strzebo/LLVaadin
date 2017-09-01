@@ -95,7 +95,7 @@ public class Trasy extends VerticalLayout implements View
 
         footer.addComponent(gridTrasy);
 
-        if(main.getUserID() > 0)
+        if(main.getUserID() > 0 && main.getUserType() == 1)
         {
             footer.addComponent(buttonZarezerwuj);
         }

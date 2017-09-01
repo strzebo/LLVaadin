@@ -91,6 +91,16 @@ public class Main
         db.Update("uzytkownik",set,where);
     }
 
+    public void updateSingleData(String zmienianaZmienna, String wartoscZmiennej, int ID) throws SQLException
+    {
+        DbConnection db = new DbConnection();
+
+        String set = zmienianaZmienna + " = '" + wartoscZmiennej + "'";
+        String where = "ID = '" + ID + "'";
+
+        db.Update("uzytkownik",set,where);
+    }
+
     public void rezerwacja(int IDLotu, int IDKlient, String stanRezerwacji) throws SQLException
     {
         DbConnection db = new DbConnection();
@@ -151,12 +161,13 @@ public class Main
         db.Update("rezerwacja",set,where);
     }
 
-    public List<Uzytkownik> getUzytkownikList() throws SQLException
+    public List<Uzytkownik> getUzytkownikList(int userType) throws SQLException
     {
         DbConnection db = new DbConnection();
         List<Uzytkownik> uzytkownikList = new ArrayList<>();
+        String where = "TypKonta < " + userType;
 
-        ResultSet resultSet = db.Result("","uzytkownik","");
+        ResultSet resultSet = db.Result("","uzytkownik",where);
 
         while(resultSet.next())
         {
@@ -164,6 +175,7 @@ public class Main
                     (
                             new Uzytkownik
                                     (
+                                            resultSet.getInt("ID"),
                                             resultSet.getString("Imie"),
                                             resultSet.getString("Nazwisko"),
                                             resultSet.getString("Email"),
